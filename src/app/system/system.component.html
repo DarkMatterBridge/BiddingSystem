@@ -1,0 +1,43 @@
+<p>
+    Bidding
+</p>
+<button (click)="reset()">reset </button>
+<button (click)="startBidding()"> Start Bidding </button>
+
+<span *ngFor="let bid of bidding; let i = index">
+    <a [routerLink]="" (click)="revertBidding(i)"> {{bid[0]}} [{{bid[1]}}] </a> -
+</span>
+
+<p></p>
+
+<div *ngIf="!editMode">
+    <ul>
+        <li *ngFor="let x of props">
+            <a [routerLink]="" (click)="select(x[0])"> {{x[0]}}  </a>:
+            {{x[1]}}
+        </li>
+    </ul>
+</div>
+
+<div *ngIf="editMode">
+    {{biddingRoot}}
+    <ul>
+        <li *ngFor="let x of props">
+            <a [routerLink]="" (click)="select(x[0])"> {{x}} </a>:
+            <input [(ngModel)]="bsBranch[x[0]]['Desc']" size="60"/>
+            <a [routerLink]="" (click)="delete(x[0])"> Del </a> - {{bsBranch[x[0]]["Follow"]}}
+        </li>
+        <li><input [(ngModel)]="bid" size="5" /><input [(ngModel)]="desc" size="60"/> <a [routerLink]="" (click)="add()"> Add </a>
+        </li>
+    </ul>
+</div>
+
+<button (click)="editMode=!editMode"> Edit-Switch </button>
+<button (click)="downloadSystem()"> Download System </button>
+<input #imageInput type="file" accept=".json" (change)="processFile(imageInput)">
+<p></p>
+
+<button (click)="load()"> Reload Fixed System</button>
+<button (click)="newSystem()"> New System </button>
+
+{{biddingSystem}}

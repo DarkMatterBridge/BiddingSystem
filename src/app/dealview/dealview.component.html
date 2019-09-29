@@ -1,0 +1,19 @@
+<p>
+  dealview works!
+</p>
+
+<span *ngFor="let card of cards"> {{card}} </span>
+<span *ngFor="let card of cards"> {{dealservice.cardValue(card)}}</span>
+<p>
+  </p>
+  
+
+<div *ngFor="let direction of directions">
+    <span *ngFor="let card of hands[direction].cards"> {{dealservice.cardValue(card)}}</span>
+--> Points: {{hands[direction].points()}}
+    </div>
+
+    <div *ngFor="let direction of directions">
+        <span > {{hands[direction].printHand()}}</span>
+    --> Points: {{hands[direction].points()}}
+        </div>

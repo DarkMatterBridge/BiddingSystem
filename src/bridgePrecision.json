@@ -1,0 +1,113 @@
+{
+  "1C": {
+    "Desc": "16+",
+    "Form": "P>15",
+    "Sit": "1CLUB",
+    "Follow": {
+      "1D": {
+        "Desc": "0-7",
+        "Form": "0<=P<8",
+        "Follow": "S.1C1D"
+      },
+      "1H": {
+        "Desc": "8-11",
+        "Form": "0<=P<8",
+        "Follow": {
+          "1S": "4+Spades"
+        }
+      },
+      "1S": {
+        "Desc": "8+, 5+Spades"
+      },
+      "1N": {
+        "Desc": "12+, 5+Clubs"
+      },
+      "2C": {
+        "Desc": "12+, 5+Diamonds"
+      },
+      "2D": {
+        "Desc": "12+, 5+Heats"
+      }
+    },
+    "FollowOpponentBidding": {
+      "X": "5-7",
+      "nS": "5+ nS[+1]"
+    }
+  },
+  "S.1C1D": {
+    "1M": {
+      "Desc": "4+, f1, unbal., may have longer minor",
+      "Form": null,
+      "Follow": {
+        "1S": "4+S, 0-7",
+        "1N": {
+          "Desc": "0-5"
+        }
+      }
+    },
+    "1N": {
+      "Desc": "17-19, bal.",
+      "Sit": "S.1N"
+    },
+    "2m": {
+      "Desc": "5+, unbal."
+    },
+    "2H": {
+      "Desc": "GF with Hearts or 24+ bal."
+    },
+    "2S": {
+      "Desc": 4441
+    },
+    "2N": {
+      "Desc": "22-23, bal."
+    },
+    "3N": {
+      "Desc": "to play"
+    }
+  },
+  "2T": {
+    "Desc": "11-15, 6+C",
+    "Follow": {
+      "2D": "Asking"
+    }
+  },
+  "2N": {
+    "Desc": "22-23, bal.",
+    "Prio": 100,
+    "Follow": {
+      "3T": "Puppett"
+    }
+  },
+  "S.1N": [
+    {
+      "2C": "Stayman"
+    }
+  ],
+  "Opening": [
+    {
+      "1M": "11-15, 5+M",
+      "Follow": [
+        {
+          "1N": "f1",
+          "Follow": [
+            {
+              "2m": "3+"
+            },
+            {
+              "2M": "6+"
+            }
+          ]
+        },
+        {
+          "2M": "6-9, support"
+        },
+        {
+          "2C": "nat. 11+"
+        }
+      ]
+    },
+    {
+      "1N": "14-16, bal."
+    }
+  ]
+}
