@@ -8,13 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { DealviewComponent } from './dealview/dealview.component';
 import { FormsModule } from '@angular/forms';
 import { SystemdownloadComponent } from './systemdownload/systemdownload.component';
+import { BiddingComponent } from './bidding/bidding.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SystemComponent,
     DealviewComponent,
-    SystemdownloadComponent
+    SystemdownloadComponent,
+    BiddingComponent
   ],
   imports: [
     BrowserModule,

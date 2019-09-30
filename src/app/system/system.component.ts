@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { endTimeRange } from '@angular/core/src/profile/wtf_impl';
 import { resetCompiledComponents } from '@angular/core/src/render3/jit/module';
 import { stringify } from '@angular/core/src/util';
+import { BiddingState } from '../model/BiddingState';
 
 
 @Component({
@@ -37,6 +38,8 @@ export class SystemComponent implements OnInit {
 
   rbs: any;
   lastBid: any;
+
+  biddingState: BiddingState;
 
 //  biddingstate = {currentnode: any, currentbid: string, nextBidNodes : any};
 
@@ -112,7 +115,6 @@ export class SystemComponent implements OnInit {
 
   select(x) {
 
-    var bidFromPrevAfterFolllow = null;
     if (this.biddingRoot === "")
       this.biddingRoot = x;
     var bid = this.bsBranch[x];  // get node for bid 
