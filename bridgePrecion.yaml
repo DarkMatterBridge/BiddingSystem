@@ -30,8 +30,6 @@ opening:
               AfterFollow: 
                 4C:
                   Desc: '5+Cxxxxxxxxxxxx'
-                7N:
-                  Desc: '7Nxxxxxxxx'
               Follow:
                 3D:
                   Desc: '3-H, 3-S'

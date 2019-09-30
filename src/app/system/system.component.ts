@@ -33,6 +33,13 @@ export class SystemComponent implements OnInit {
 
   biddingRoot = "";
   mixBidsFromBranchAfterFollow = false;
+  tryBidSelectFromBranchAfterFollow = false;
+
+  rbs: any;
+  lastBid: any;
+
+//  biddingstate = {currentnode: any, currentbid: string, nextBidNodes : any};
+
 
   ngOnInit() {
 
@@ -99,7 +106,8 @@ export class SystemComponent implements OnInit {
 
   delete(x) {
     delete this.bsBranch[x];
-    this.props = Object.getOwnPropertyNames(this.bsBranch);
+    this.props = this.props.filter( p => p[0]!=x);
+//    this.props = this.getPossibleBids(this.bsBranch);
   }
 
   select(x) {
@@ -109,15 +117,22 @@ export class SystemComponent implements OnInit {
       this.biddingRoot = x;
     var bid = this.bsBranch[x];  // get node for bid 
 
-    if (!bid && this.bsBranchAfterFollow) {
+    if (bid === undefined && this.tryBidSelectFromBranchAfterFollow) {
+      console.log(this.bsBranchAfterFollow);
+      alert("select bid in branch after follow")
       bid = this.bsBranchAfterFollow[x];
+      this.tryBidSelectFromBranchAfterFollow = false;
     }
- 
-    if (!bid["Follow"]) {
+    this.lastBid = bid;
+   
+    if (bid["Follow"] === undefined) {
+      alert("no follow")
       if (!this.editMode)
         return null;  // mach nix falls keine weiteren Gebote vorhanden
       else {
-        this.bsBranch[x]["Follow"] = {};
+        //        this.bsBranch[x]["Follow"] = {};
+        alert("new follow branch")
+        bid["Follow"] = {};
       }
     }
     var meaning = bid["Desc"];
@@ -131,49 +146,53 @@ export class SystemComponent implements OnInit {
 
     this.props = this.getPossibleBids(this.bsBranch);
     if (this.mixBidsFromBranchAfterFollow) {
+      alert("mix bids");
       this.props = null;
       var a = this.getPossibleBids(this.bsBranch);
       var b = this.getPossibleBids(this.bsBranchAfterFollow);
-      this.props = [].concat(a,b);
+      this.props = [].concat(a, b);
       this.mixBidsFromBranchAfterFollow = false;
-    }
-
-    this.bsBranchAfterFollow = bid["AfterFollow"];
-    if (this.bsBranchAfterFollow) {
-      this.mixBidsFromBranchAfterFollow = true;
-      console.log(this.bsBranchAfterFollow);
+      this.tryBidSelectFromBranchAfterFollow = true;
+    } else {
+      this.bsBranchAfterFollow = bid["AfterFollow"];
+      if (this.bsBranchAfterFollow)
+        this.mixBidsFromBranchAfterFollow = true;
     }
 
     this.bidding.push([x, meaning]);
     this.nodes.set(x, this.bsBranch);
+    this.rbs = this.getRootBranches();
   }
 
+  
   revertBidding(i) {
     this.bsBranch = this.nodes.get(this.bidding[i][0]);
-    this.props = Object.getOwnPropertyNames(this.bsBranch);
+    this.props = this.getPossibleBids(this.bsBranch);
     this.bidding.splice(i + 1, 100);
   }
 
 
   reset() {
     this.bsBranch = this.bs;
-    this.props =  this.getPossibleBids(this.bsBranch);  
+    this.props = this.getPossibleBids(this.bsBranch);
     this.bidding = [];
     this.biddingRoot = "";
+    this.mixBidsFromBranchAfterFollow = false;
+    this.tryBidSelectFromBranchAfterFollow = false;
   }
 
   startBidding() {
     this.bsBranch = this.bs["opening"]["Follow"];
-    this.props =  this.getPossibleBids(this.bsBranch);  
+    this.props = this.getPossibleBids(this.bsBranch);
     this.bidding = [];
     this.biddingRoot = "opening";
-  }
-  
-  getPossibleBids(branch: any) {
-    console.log(branch);
-    return Object.getOwnPropertyNames(branch).map(bid => [bid,branch[bid]['Desc']]);
+    this.mixBidsFromBranchAfterFollow = false;
+    this.tryBidSelectFromBranchAfterFollow = false;
   }
 
+  getPossibleBids(branch: any) {
+    return Object.getOwnPropertyNames(branch).map(bid => [bid, branch[bid]]);
+  }
 
   configUrl = 'assets/bridgePrecision.json';
 
@@ -181,7 +200,7 @@ export class SystemComponent implements OnInit {
     this.getConfig().subscribe(
       (data: any) => {
         this.bs = data;
-        this.reset();
+        this.startBidding();
       }
     );
   }
@@ -213,13 +232,28 @@ export class SystemComponent implements OnInit {
   changeText() {
   }
 
+
+  getRootBranches() {
+    return Object.getOwnPropertyNames(this.bs);
+  }
   add() {
     this.bsBranch[this.bid] = { 'Desc': this.desc };
-    this.props = Object.getOwnPropertyNames(this.bsBranch);
+    this.props = this.getPossibleBids(this.bsBranch);
     this.bid = "";
     this.desc = "";
   }
 
+  attachRouteBranch(rb) {
+    console.log(this.lastBid);
+    this.lastBid['Follow'] = rb;
+    console.log(this.lastBid);
+  }
+
+  detachRouteBranch(x) {
+    var bid = this.bsBranch[x];  // get node for bid 
+    this.lastBid['Follow'] = {}
+  }
+ 
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const fileReader = new FileReader();

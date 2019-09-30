@@ -14,7 +14,7 @@
     <ul>
         <li *ngFor="let x of props">
             <a [routerLink]="" (click)="select(x[0])"> {{x[0]}}  </a>:
-            {{x[1]}}
+            {{x[1]["Desc"]}}
         </li>
     </ul>
 </div>
@@ -23,13 +23,18 @@
     {{biddingRoot}}
     <ul>
         <li *ngFor="let x of props">
-            <a [routerLink]="" (click)="select(x[0])"> {{x}} </a>:
-            <input [(ngModel)]="bsBranch[x[0]]['Desc']" size="60"/>
-            <a [routerLink]="" (click)="delete(x[0])"> Del </a> - {{bsBranch[x[0]]["Follow"]}}
+            <a [routerLink]="" (click)="select(x[0])"> {{x[0]}} </a>:
+            <input [(ngModel)]="x[1]['Desc']" size="60"/>
+            <a [routerLink]="" (click)="delete(x[0])"> Del </a> - 
+            <a [routerLink]="" (click)="detachRouteBranch(x[0])"> Delete Atttachment {{x[1]["Follow"]}} </a>
+           
         </li>
         <li><input [(ngModel)]="bid" size="5" /><input [(ngModel)]="desc" size="60"/> <a [routerLink]="" (click)="add()"> Add </a>
         </li>
     </ul>
+    <div *ngIf="props.length == 0"> Add a RootBranches
+        <span *ngFor="let rb of rbs" > <a [routerLink]="" (click)="attachRouteBranch(rb)">   {{rb}}  </a></span>
+    </div>
 </div>
 
 <button (click)="editMode=!editMode"> Edit-Switch </button>
