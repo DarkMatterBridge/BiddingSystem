@@ -1,3 +1,44 @@
 <p>
-  bidding works!
-</p>
+    <button (click)="startBidding()"> Start Bidding </button>
+  </p>
+
+  <span *ngFor="let bid of bidding.bids; let i = index ">
+      <a [routerLink]="" (click)="revertTo(i)"> {{bid}}  </a>:
+        {{bidding.nodes[i]["Desc"]}}
+    </span>
+
+<div *ngIf="!editMode">
+    <ul>
+        <li *ngFor="let bid of possibleBids; let i = index ">
+          <a [routerLink]="" (click)="select(i)"> {{bid[0]}}  </a>:
+            {{bid[1]["Desc"]}}
+        </li>
+    </ul>
+</div>
+
+<div *ngIf="editMode">
+    biddingRoot todo
+    <ul>
+        <li *ngFor="let bid of possibleBids; let i = index ">
+            <a [routerLink]="" (click)="select(i)"> {{bid[0]}}  </a>:
+            <input [(ngModel)]="bid[1]['Desc']" size="60"/>
+
+            <a *ngIf="!hasAnchor(i)" [routerLink]="" (click)="addAnchor(i)"> Add Anchor  </a>
+          </li>
+        <li><input [(ngModel)]="bid" size="5" /><input [(ngModel)]="desc" size="60"/> <a [routerLink]="" (click)="addBid()"> Add </a>
+        </li>
+    </ul>
+    <div *ngIf="possibleBids.length ==0"> Add a RootBranches
+        <div *ngFor="let key of keys" > 
+            <a [routerLink]="" (click)="attachAnchor(key)"> {{key}} : {{anchors.get(key)[1]}}  </a>
+           </div>
+    </div>
+</div>
+
+
+<button (click)="editMode=!editMode"> Edit-Switch </button>
+<button (click)="load()"> Reload Fixed System</button>
+
+<input #jsonInput type="file" accept=".json" (change)="processFile(jsonInput)">
+<button (click)="downloadSystem()"> Download System</button>
+

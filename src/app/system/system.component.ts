@@ -238,6 +238,7 @@ export class SystemComponent implements OnInit {
   getRootBranches() {
     return Object.getOwnPropertyNames(this.bs);
   }
+  
   add() {
     this.bsBranch[this.bid] = { 'Desc': this.desc };
     this.props = this.getPossibleBids(this.bsBranch);

@@ -26,6 +26,7 @@ opening:
           Desc: '12-13, bal.'
           Follow:
             3C:
+              Anchor: 'x1'
               Desc: 'Asking for 4 card majors'
               AfterFollow: 
                 4C:
@@ -224,7 +225,7 @@ opening:
     2N:
       Desc: '22-23, bal.'
       Prio: 100
-      Follow:
+      Follow: 
         3C:
           Desc: Puppet
 1DOpening:
