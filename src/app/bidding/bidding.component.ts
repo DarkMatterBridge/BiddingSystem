@@ -16,7 +16,7 @@ export class BiddingComponent implements OnInit {
   keys: any[];
   editMode = false;
   http: HttpClient;
-  possibleBids: any[];
+  possibleBids: any;
 
   bid: string;
   desc: string;
@@ -27,7 +27,7 @@ export class BiddingComponent implements OnInit {
     this.biddingSystem = new BiddingSystem(this.http);
     this.biddingSystem.loadSystem().subscribe(
       (data: any) => {
-        this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
+        this.possibleBids = this.biddingSystem.currentPossibleBids;
       }
     );
     this.bidding = new Bidding();
@@ -36,7 +36,8 @@ export class BiddingComponent implements OnInit {
   select(i) {
     this.biddingSystem.selectBid(this.biddingSystem.getBidByIndex(i));
     this.bidding.addBid(this.biddingSystem.getCurrentBid());
-    this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
+    this.possibleBids = this.biddingSystem.currentPossibleBids;
+//    this.possibleBids = this.biddingSystem.getCurrentPossibleBids_();
     if (this.possibleBids.length == 0) {
        this.anchors = this.biddingSystem.findAllAnchors();
         this.keys =  Array.from(this.biddingSystem.anchors.keys()); //   Object.keys(this.anchors);
@@ -46,13 +47,13 @@ export class BiddingComponent implements OnInit {
   revertTo(i) {
     this.biddingSystem.currentNode = this.bidding.getBid(i)[1];
     this.bidding.cutBidding(i);
-    this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
+    this.possibleBids = this.biddingSystem.getCurrentPossibleBids_();
   }
 
   addAnchor(i) {
 
     var obid = this.biddingSystem.getBidByIndex(i);
-    obid[1]["Anchor"] = this.biddingSystem.maxAnchor + 1;
+    obid[1]["Anchor"] = this.biddingSystem.maxAnchor + 1; 
     this.biddingSystem.findAllAnchors(); 
   }
 
@@ -68,7 +69,7 @@ export class BiddingComponent implements OnInit {
 
   addBid() {
     this.biddingSystem.addBidToCurrentNode(this.bid, this.desc);
-    this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
+    this.possibleBids = this.biddingSystem.getCurrentPossibleBids_();
     this.bid = "";
     this.desc = "";
   }
@@ -76,7 +77,7 @@ export class BiddingComponent implements OnInit {
 
   attachAnchor(anchor) {
     this.biddingSystem.attachAnchorToCurrentNode(anchor);
-    this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
+    this.possibleBids = this.biddingSystem.getCurrentPossibleBids_();
   }
 
   processFile(jsonInput: any) {
@@ -86,7 +87,7 @@ export class BiddingComponent implements OnInit {
       var data: string | ArrayBuffer;
       data = fileReader.result
       this.biddingSystem.systemHierarchy = JSON.parse(data.toString());
-      this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
+      this.possibleBids = this.biddingSystem.getCurrentPossibleBids_();
       this.bidding.cutBidding(-1);
     }
     fileReader.readAsText(file);

@@ -28,7 +28,13 @@ export class BiddingSystem {
         this._currentBid = value;
     }
 
-    private currentPossibleBids: [];
+    private _currentPossibleBids: any;
+    public get currentPossibleBids(): any {
+        return this._currentPossibleBids;
+    }
+    public set currentPossibleBids(value: any) {
+        this._currentPossibleBids = value;
+    }
 
     bridgeSystemUrl = 'assets/bridgePrecision.json';
 
@@ -71,6 +77,10 @@ export class BiddingSystem {
         return Object.getOwnPropertyNames(node["Follow"]).map(bid => [bid, node["Follow"][bid]]);
     }
 
+    determineCurrentPossibleBids() {
+        this.currentPossibleBids = this.getPossibleBids(this.currentNode);
+    }
+
     followExist(node: any) {
         return node["Follow"] != undefined;
     }
@@ -84,11 +94,11 @@ export class BiddingSystem {
     }
 
     getBidByIndex(i) {
-        return this.getCurrentPossibleBids()[i];
+        return this.getCurrentPossibleBids_()[i];
     }
 
     getBidByName(bid: string) {
-        return this.getCurrentPossibleBids().filter(bidob => bidob[0] === bid)[0];
+        return this.getCurrentPossibleBids_().filter(bidob => bidob[0] === bid)[0];
     }
 
     selectBidByIndex(i) {
@@ -105,6 +115,7 @@ export class BiddingSystem {
         this.currentBid = bidob[0];
         this.currentNode = bidob[1];
         this.currentNode = this.getAttachedNode(this.currentNode);
+        this.determineCurrentPossibleBids();
         //        this.retireafterfollow = this.activeafterfollow; 
         //        this.activAfterfollow = this.preparedAfterfollow;
         //        this.preparedAfterFollow = this.currentNode["Afterfollow"];
@@ -153,7 +164,7 @@ export class BiddingSystem {
         this.currentNode = this.systemHierarchy["opening"];
         this.currentBid = "";
         this.findAllAnchors();
-        return this.getCurrentPossibleBids(); 
+        return this.getCurrentPossibleBids_(); 
     }
 
     getRootNodes() {
