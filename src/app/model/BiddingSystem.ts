@@ -60,7 +60,7 @@ export class BiddingSystem {
         return node["Desc"];
     }
 
-    getCurrentPossibleBids_() {
+    getCurrentPossibleBids() {
         return this.getPossibleBids(this.currentNode);
         //        return Object.getOwnPropertyNames(this.activatedAfterFollow).map(bid => [bid,this.activatedAfterFollow[bid]]);
     }
@@ -68,7 +68,10 @@ export class BiddingSystem {
     getPossibleBids(node: any) {
         if (!this.followExist(node))
             this.addEmptyFollow(node); // add default follow
-        return Object.getOwnPropertyNames(node["Follow"]).map(bid => [bid, node["Follow"][bid]]);
+        var bids = Object.getOwnPropertyNames(node["Follow"]).map(bid => [bid, node["Follow"][bid]])
+        if (node["Opponent"] )
+        bids = bids.concat(Object.getOwnPropertyNames(node["Opponent"]).map(bid => [bid, node["Opponent"][bid]]));
+        return bids;
     }
 
     followExist(node: any) {
@@ -104,6 +107,8 @@ export class BiddingSystem {
     selectBid(bidob) {
         this.currentBid = bidob[0];
         this.currentNode = bidob[1];
+        var an = this.getAttachedNode(this.currentNode);
+        this.currentNode = this.getAttachedNode(this.currentNode);  // todo > repitition + bidding
         this.currentNode = this.getAttachedNode(this.currentNode);
         //        this.retireafterfollow = this.activeafterfollow; 
         //        this.activAfterfollow = this.preparedAfterfollow;
@@ -112,6 +117,16 @@ export class BiddingSystem {
 
     followIsAttachedNode(node) {
         return node["Follow"] != null && typeof node["Follow"] === 'string'
+    }
+
+    followHasRealChild(node) {
+//        alert(JSON.stringify(node["Follow"]))
+        return node["Follow"] != null && typeof node["Follow"] != 'string' && node["Follow"] != {}
+    }
+
+    hasFollow(node) {
+//        alert(JSON.stringify(node["Follow"]))
+        return node["Follow"] != null && node["Follow"] != {}
     }
 
     getAttachedNode(node) {
@@ -130,14 +145,41 @@ export class BiddingSystem {
         }
     }
 
+    /// Anchors
     attachAnchorToCurrentNode(anchor) {
-        this.attachRootNode(this.currentNode, anchor);
+        this.attachNode(this.currentNode, anchor);
+        console.log("Added Anchor " + anchor + " to " + this.currentBid);
+        this.currentNode = this.getAttachedNode(this.currentNode);
         this.currentNode = this.getAttachedNode(this.currentNode);
     }
 
-    attachRootNode(node: any, anchor: string) {
-        node["Follow"] = anchor;
-        console.log("Added Anchor "+anchor+" to "+this.currentBid);
+    attachNode(node: any, anchor: string) {
+        alert("Anchor : " + anchor + "Follow : " + node["Follow"]);
+        if (anchor != node["Follow"]) {
+            node["Follow"] = anchor;
+        } else
+            alert("Self Attachment not allowed");
+    }
+
+    addAnchor(i) {
+        var obid = this.getBidByIndex(i);
+        this.addAnchorToNode(obid[1]);
+    }
+
+    addAnchorToNode(node) {
+        this.maxAnchor++;
+        node["Anchor"] = this.maxAnchor.toString();
+        this.findAllAnchors();
+    }
+
+    removeAnchor(i): boolean {
+        var obid = this.getBidByIndex(i);
+        return this.removeAnchorFromNode(obid[1]);
+    }
+
+    removeAnchorFromNode(node): boolean {
+        delete node["Anchor"]
+        return true;
     }
 
     addBidToNode(node: any, bid: string, description: string) {
@@ -147,48 +189,62 @@ export class BiddingSystem {
 
     addBidToCurrentNode(bid: string, description: string) {
         this.addBidToNode(this.currentNode, bid, description);
+        this.findAllAnchors();
     }
 
     startBidding() {
+      //  a["1Z"] =  JSON.parse(JSON.stringify(b))
         this.currentNode = this.systemHierarchy["opening"];
         this.currentBid = "";
         this.findAllAnchors();
-        return this.getCurrentPossibleBids(); 
+        return this.getCurrentPossibleBids();
+    }
+
+    startRootBidding() {
+        this.currentNode = {"Follow":this.systemHierarchy};
+        this.currentBid = "";
+        this.findAllAnchors();
+        return this.getCurrentPossibleBids();
     }
 
     getRootNodes() {
-        let rootnodes =  Object.getOwnPropertyNames(this.systemHierarchy);
+        let rootnodes = Object.getOwnPropertyNames(this.systemHierarchy);
         rootnodes.forEach(rootnodeName => {
             console.log(rootnodeName);
             console.log(this.systemHierarchy[rootnodeName]["Follow"]);
-            this.anchors.set(rootnodeName, [this.systemHierarchy[rootnodeName],this.systemHierarchy[rootnodeName]["Desc"] ]);
-        }); 
+            this.anchors.set(rootnodeName, [this.systemHierarchy[rootnodeName], this.systemHierarchy[rootnodeName]["Desc"]]);
+        });
 
-//        for (var i in this.systemHierarchy) {
-//            this.anchors.push([this.systemHierarchy[i], i, this.systemHierarchy[i]["Desc"]]);
- //           this.anchors[i]=[this.systemHierarchy[i],this.systemHierarchy[i]["Desc"]];
- //           console.log(this.anchors[i][1]);
- //       }
+        //        for (var i in this.systemHierarchy) {
+        //            this.anchors.push([this.systemHierarchy[i], i, this.systemHierarchy[i]["Desc"]]);
+        //           this.anchors[i]=[this.systemHierarchy[i],this.systemHierarchy[i]["Desc"]];
+        //           console.log(this.anchors[i][1]);
+        //       }
     }
 
     findAllAnchors() {
         this.maxAnchor = 0;
         this.anchors = new Map();
-        this.traverse(this.systemHierarchy, "");
+        this.traverse(this.systemHierarchy, "Anchor", "");
         this.getRootNodes();
         return this.anchors;
     }
 
-    traverse(o, bidsequence) {
+    findAllFollow() {
+
+    }
+
+    traverse(o, name, bidsequence) {
         for (var i in o) {
             if (o[i] !== null && typeof (o[i]) == "object") {
-                this.traverse(o[i], bidsequence + i.replace("Follow", "-"));
+                this.traverse(o[i], name, bidsequence + i.replace("Follow", "-"));
             } else
-                if (i == "Anchor") {
-                    this.anchors.set(o[i],[o, bidsequence +" : " + o["Desc"]]);
-                    if ( +o[i]> this.maxAnchor)
-                      this.maxAnchor = +o[i];
-                    console.log("Anchor found: "+o[i]);
+                if (i == name) {
+                    if (this.hasFollow(o)) {
+                        this.anchors.set(o[i], [o, bidsequence + " : " + o["Desc"]]);
+                        if (+o[i] > this.maxAnchor)
+                            this.maxAnchor = +o[i];
+                    }
                 }
         }
     }

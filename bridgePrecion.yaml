@@ -1,4 +1,10 @@
 opening:
+  Opponent:
+    2H:
+      Desc: 4+H, 4+S, 6-10
+      Follow:
+        X:
+          Desc: 15-18, semibal
   Follow:
     1C:
       Desc: 16+
@@ -7,30 +13,343 @@ opening:
           Desc: 0-7
           Follow: 1C-1D
         1H:
-          Desc: 8-11
+          Desc: '8-11, 4-S'
           Follow: 1C-1H
         1S:
           Desc: '8+, 5+S'
           Follow: 1C-1P
         1N:
           Desc: '12+, 5+C'
+          Follow:
+            2C:
+              Desc: '2+C, waiting'
+              Follow:
+                2D:
+                  Desc: 4+D
+                2H:
+                  Desc: 4+H
+                2S:
+                  Desc: 4+S
+                2N:
+                  Desc: '(332)5 '
+                3C:
+                  Desc: 6+C
+            2D:
+              Desc: 5+D
+              Follow:
+                2H:
+                  Desc: 4+H
+                  Follow:
+                    2S:
+                      Desc: '/???'
+                    2N:
+                      Desc: waiting
+                    3C:
+                      Desc: 3+C
+                    3D:
+                      Desc: 6+D
+                    3H:
+                      Desc: 4+H
+                2S:
+                  Desc: 6+C
+                2N:
+                  Desc: '3325'
+                3C:
+                  Desc: 3+D
+                  Follow:
+                    3D:
+                      Desc: 4+D
+                3D:
+                  Desc: '4+S /exakt'
+                3H:
+                  Desc: '5+H, 6+C'
+            2H:
+              Desc: 5+H
+              Follow:
+                2S:
+                  Desc: 6+C
+                  Follow:
+                    2N:
+                      Desc: wating
+                    3C:
+                      Desc: 2+C
+                    3D:
+                      Desc: 4+D
+                    3H:
+                      Desc: 6+H
+                2N:
+                  Desc: '3235'
+                3C:
+                  Desc: 4+D
+                  Follow:
+                    3D:
+                      Desc: 4+D
+                    3H:
+                      Desc: 6+H
+                3D:
+                  Desc: '4+S / exakt'
+                  Follow:
+                    3H:
+                      Desc: 6+H
+                    3S:
+                      Desc: 4+S
+                    3N:
+                      Desc: 'play suggestion'
+                3H:
+                  Desc: 3+H
+            2S:
+              Desc: 5+S
+              Follow:
+                2N:
+                  Desc: '2335'
+                3C:
+                  Desc: 4+D
+                  Follow:
+                    3D:
+                      Desc: 4+D
+                    3H:
+                      Desc: '/???'
+                    3S:
+                      Desc: 6+S
+                    3N:
+                      Desc: 'play suggestion'
+                3D:
+                  Desc: '4+H/ exakt 4H'
+                3H:
+                  Desc: 6+C
+                  Follow: {}
+                3S:
+                  Desc: 4+S
+            2N:
+              Desc: '4441'
+            3C:
+              Desc: '3+C(>Qxx), nonmin'
+            3D-S:
+              Desc: 6+bidsuid(<=1Loser)
+            4m:
+              Desc: todo
         2C:
           Desc: '12+, 5+D'
+          Follow:
+            2D:
+              Desc: '2+D, Turbosuit:=D / kann sich noch ändern'
+              Follow:
+                2H:
+                  Desc: 4+H
+                2S:
+                  Desc: 4+C
+                2N:
+                  Desc: '3352 / stopper in restfarben ????'
+                3C:
+                  Desc: 6+D
+                3D:
+                  Desc: 4+S
+                3H:
+                  Desc: '5H, 6+D'
+                3S:
+                  Desc: '6+D, 1-S /NIS'
+                3N:
+                  Desc: '????'
+                4m:
+                  Desc: '6+D, 1-m /NIS'
+            2H:
+              Desc: 5+H
+              Follow:
+                2S:
+                  Desc: 4+C
+                  Follow:
+                    3C:
+                      Desc: 4+C
+                2N:
+                  Desc: '3253'
+                3C:
+                  Desc: 6+D
+                  Follow:
+                    3D:
+                      Desc: 2+D
+                    3H:
+                      Desc: 6+H
+                    3S:
+                      Desc: 4+S
+                    3N:
+                      Desc: 'play suggestion, min'
+                3D:
+                  Desc: '4+S / exakt 4er Pik??'
+                3H:
+                  Desc: 3+H
+                3S:
+                  Desc: '???'
+                3N:
+                  Desc: '????'
+            2S:
+              Desc: 5+C
+            2N:
+              Desc: '4414'
+            3C:
+              Desc: 5+S
+            3D:
+              Desc: 3+D(>Qxx)
+            3M:
+              Desc: 'todo / legt Trumpffarbe fest, Cuebids'
+            4C:
+              Desc: 6+C(<=1Loser)
+              Follow: Turbo
+            4D:
+              Desc: 3+D
         2D:
           Desc: '12+, 5+H'
+          Follow:
+            2H:
+              Desc: '2+H, Turbosuit:=H'
+              Follow:
+                2S:
+                  Desc: 4+C
+                2N:
+                  Desc: wating
+                3C:
+                  Desc: 4+D
+                3D:
+                  Desc: 4+S
+                3H:
+                  Desc: 6+S
+            2S:
+              Desc: 5+C
+              Follow:
+                2N:
+                  Desc: waiting
+                3C:
+                  Desc: 3+C
+                3D:
+                  Desc: 4+D
+                3H:
+                  Desc: 6+H
+                3S:
+                  Desc: 4+S
+                3N:
+                  Desc: 'min, 3532 /NIS'
+            2N:
+              Desc: '4144'
+              Follow:
+                3m:
+                  Desc: 4+m
+                3H:
+                  Desc: '6+H / sollte präzisiert werden > sehr gutes Coeur'
+                3S:
+                  Desc: 4S
+                3N:
+                  Desc: 'play suggestion, min'
+            3C:
+              Desc: 5+D
+              Follow:
+                3D:
+                  Desc: 3+D
+                3H:
+                  Desc: 6+H
+                3S:
+                  Desc: 4S
+                3N:
+                  Desc: 'play suggestion, min'
+            3D:
+              Desc: 5+S
+              Follow:
+                3H:
+                  Desc: 6+H
+                3S:
+                  Desc: 3+S
+                3N:
+                  Desc: 'play suggestion'
+            3H:
+              Desc: '3+H(>Qxx), nonmin'
+              Follow: {}
+            3S:
+              Desc: '6+S(<=1Loser), Turbosuit:=S, requests Cuebids'
+              Follow: {}
+            3N:
+              Desc: /nis
+            4m:
+              Desc: 'Turbosuit:=m'
+              Follow: Turbo
         2H:
           Desc: '14+, bal.'
+          Follow:
+            2S:
+              Desc: 5+S
+            2N:
+              Desc: 5+H
+            3C:
+              Follow: '0'
+            3D:
+              Desc: ""
+              Follow: '1'
+            3M:
+              Desc: '4+M, 5+C'
+              Follow:
+                3N:
+                  Desc: '3-C, 3-M, min'
+                4C:
+                  Desc: '4C, Turbo-Request'
+                4D:
+                  Desc: 'all other / not defined ????'
+                4M:
+                  Desc: '4M, Turbo-Request'
+                4N:
+                  Desc: '3343, nonmin'
+            4C:
+              Follow: '3'
+            4D:
+              Desc: ""
+              Follow: '4'
+            3N:
+              Desc: '4333, min'
+              Follow:
+                4C:
+                  Desc: asking
+                  Follow:
+                    4D-N:
+                      Desc: 'colorsteps / 4 in CDHS in steps'
+                      Follow:
+                        S1:
+                          Desc: 'requests Turbo'
+                          Follow: Turbo
         2S:
           Desc: '12+, 4441'
+          Follow:
+            2N:
+              Desc: asking
+              Follow:
+                3C-S:
+                  Desc: '1 in bidsuit'
+                  Follow:
+                    S1/ex3N:
+                      Desc: 'asking '
+                      Follow: 1C-2S-A-R-AskingPoints
+                    S2/ex3N:
+                      Desc: 'asking, 4+ midSuit'
+                      Follow: 1C-2S-A-R-AskingPoints
+                    S3/ex3N:
+                      Desc: 'asking, 4+ highSuit'
+                      Follow: 1C-2S-A-R-AskingPoints
+                    3N:
+                      Desc: 'to play'
         2N:
           Desc: '12-13, bal.'
           Follow:
             3C:
-              Anchor: 'x1'
               Desc: 'Asking for 4 card majors'
-              AfterFollow: 
+              AfterFollow:
                 4C:
-                  Desc: '5+Cxxxxxxxxxxxx'
+                  Desc: '5+C, SI'
+                  Follow:
+                    4D:
+                      Desc: '3C+, even kcs'
+                    4H:
+                      Desc: '3C+, uneven kcs, H control'
+                    4S:
+                      Desc: '3C+, uneven kcs, no H control, S control'
+                    4N:
+                      Desc: 2C-
+                    5C:
+                      Desc: '3C+, uneven kcs, no H control, no S control, D control'
               Follow:
                 3D:
                   Desc: '3-H, 3-S'
@@ -48,21 +367,23 @@ opening:
                           Follow:
                             4D:
                               Desc: '4C, requests Turbo'
+                              Follow: Turbo
                             4H:
                               Desc: '4D, requests Turbo'
+                              Follow: Turbo
                         4D:
                           Desc: '4C,4D,12'
                           Follow:
                             4H:
                               Desc: '4C, requests Turbo'
+                              Follow: Turbo
                             4S:
                               Desc: '4D, requests Turbo'
+                              Follow: Turbo
                     3S:
                       Desc: '???'
                     3N:
                       Desc: 'to play'
-                    4C:
-                      Desc: 5+C
                 3H:
                   Desc: 4S
                   Follow:
@@ -81,11 +402,11 @@ opening:
                       Desc: 5+C
                       Follow:
                         4D:
-                          Desc: '3+C, ....'
+                          Desc: '3+C, even number of kc'
                         4H:
-                          Desc: '3+C, ....'
+                          Desc: '3+C, uneven number of kc, H control'
                         4S:
-                          Desc: '3+C, ....'
+                          Desc: '3+C, uneven number of kc, no H control'
                         4N:
                           Desc: 2-C
                         5C:
@@ -100,7 +421,8 @@ opening:
                         4N:
                           Desc: '3-C, 3-D'
                     4H:
-                      Desc: '???'
+                      Desc: '4S, requests Turbo / nis '
+                      Follow: Turbo
                     4S:
                       Desc: 'to play'
                 3S:
@@ -113,10 +435,12 @@ opening:
                       Follow: {}
                     4D:
                       Desc: 'asking for 4card m'
+                      Follow: {}
                     4H:
                       Desc: 'to play'
                     4S:
-                      Desc: 'requests Turbo'
+                      Desc: '4H, requests Turbo'
+                      Follow: Turbo
                 3N:
                   Desc: '4H, 4S'
                   Follow:
@@ -126,6 +450,7 @@ opening:
                       Desc: '18+, requests 4H, Weiterreizung ???'
                     4M:
                       Desc: 'to play'
+              Anchor: '0'
             3D:
               Desc: 5+D
               Follow:
@@ -134,18 +459,41 @@ opening:
                   Follow:
                     3S:
                       Desc: 4S
+                      Follow:
+                        3N:
+                          Desc: '3-S /nis'
+                        3C:
+                          Desc: ....
+                        3D:
+                          Desc: '3D / nis'
+                        3H:
+                          Desc: '... '
                     3N:
                       Desc: 'to play'
                     4C:
                       Desc: 4+C
                     4D:
                       Desc: '6+D or 5+D excellent suit'
+                    4M:
+                      Desc: 'to play'
+                    4oM:
+                      Desc: '4+M, SI'
                 3N:
                   Desc: '3334, 12'
                 4C:
                   Desc: '3334, 13'
                 4D:
                   Desc: 4D
+                  Follow:
+                    4H:
+                      Desc: 'Turbo Request'
+                    4M:
+                      Desc: 'Cuebid / NIS'
+                    4N:
+                      Desc: 'min, to play'
+                    5C:
+                      Desc: 'Second Suit /NIS'
+              Anchor: '1'
             3M:
               Desc: 5+M
               Follow:
@@ -155,10 +503,17 @@ opening:
                   Desc: 3M
                 nSuit:
                   Desc: '4M, control in bidsuit'
+              Anchor: '2'
             3N:
               Desc: 'to play'
             4C:
-              Desc: '6+C / Weiterreizung inkonsequent im Vergleich zu Karo????'
+              Desc: '6+C / Change'
+              Anchor: '3'
+              Follow: Turbo
+            4D:
+              Desc: '6+D / Change'
+              Anchor: '4'
+              Follow: Turbo
         3C:
           Desc: '10+, any solid suid with max one side king'
           Follow:
@@ -225,15 +580,17 @@ opening:
     2N:
       Desc: '22-23, bal.'
       Prio: 100
-      Follow: 
+      Follow:
         3C:
           Desc: Puppet
+  Desc: 'the root of all bidding'
 1DOpening:
   Follow:
     1M:
       Desc: '4+M, 8+'
     1N:
       Desc: 8-11
+  Desc: 'Bidding after 1Diamond'
 1HOpening:
   Follow:
     1N:
@@ -245,6 +602,7 @@ opening:
           Desc: 4+C
         2D:
           Desc: 4+D
+  Desc: 'Bidding after 1Heart'
 1SOpening:
   Follow:
     1N:
@@ -256,10 +614,12 @@ opening:
           Desc: 4+C
         2D:
           Desc: 4+D
+  Desc: 'Bidding after 1Spade'
 2COpening:
   Follow:
     2D:
       Desc: Asking
+  Desc: 'Bidding after 2Clubs'
 1C-1D:
   Follow:
     1H:
@@ -752,6 +1112,7 @@ opening:
           Desc: waiting
         2m/H:
           Desc: '5+bidsuit  //vernünftige 5er Länge'
+          Follow: {}
         2S:
           Desc: '8-10, 3+'
           Follow:
@@ -772,19 +1133,21 @@ opening:
               Follow:
                 3D/M:
                   Desc: 1-(bidsuit-1)
+                  Follow: {}
                 3N:
                   Desc: 'no shortness, 11'
         3m/H:
-          Desc: '6G+bidsuit, 2-S'
+          Desc: '6+bidsuit(>=KQxxxx), 2-S / gute 6er Länge'
+          Follow: {}
         3S:
-          Desc: '4+S, 10-11'
+          Desc: '4+S, 10-11, 2+All'
         4m/H:
           Desc: '4+S, 1-bidsuit, 10-11'
     1N:
       Desc: '17-19, bal. or 24+, bal.'
       Follow:
         2C:
-          Desc: Puppetstayman
+          Desc: '3+M / Puppetstayman'
           Follow:
             2D:
               Desc: '4-H, 4-S'
@@ -798,7 +1161,7 @@ opening:
                 3m:
                   Desc: 5+m
                 3N:
-                  Desc: 'to play'
+                  Desc: 'to play / war nur 5er OF interessiert'
             2M:
               Desc: 5bidsuit
         2D:
@@ -813,6 +1176,8 @@ opening:
                   Desc: 1-bidsuit
                 3N:
                   Desc: semiBal.
+                3C:
+                  Desc: '/ bleibt frei damit die richtige Hand spielt ??? mach keinen Sinn'
             3C:
               Desc: 3+C
               Follow:
@@ -836,21 +1201,20 @@ opening:
                 3H/S/N:
                   Desc: 1-C/1-H/1-S
                 4D:
-                  Desc: 'no shortness'
+                  Desc: '2+Any, 6+, SI'
                   Follow:
                     4C:
                       Desc: 'requests Ersatz-Turbo'
         2N:
           Desc: 'any   / Pflichgebot'
           Prio: 0
-        3C-S:
-          Desc: '(4441) with 1bidsuit'
-          Follow: 'wie nach 1T-2S-2N-3x'
+        3A:
+          Desc: '1A, (4441) / Folgereizung TODO'
     2C:
       Desc: '5+H, unbal.'
       Follow:
         2D:
-          Desc: '2-H, 4-Sbad'
+          Desc: '2-H, 3-S eor 4S(<=Jxxx)'
           Prio: 0
           Follow:
             2H:
@@ -864,7 +1228,7 @@ opening:
             3D:
               Desc: 4+S
         2H:
-          Desc: '3H or 4H, 8-9, w/o shortness'
+          Desc: '3H or 4H, min, 2+A'
           Follow:
             2P:
               Desc: 4+C
@@ -873,10 +1237,21 @@ opening:
             3D:
               Desc: '4+S, Script ERROR'
         2S:
-          Desc: 5+C
+          Desc: '5+C, 2-H'
           Follow:
             2N:
-              Desc: Wating
+              Desc: 'Wating  / z.B. hat 4er Pik > ??? was macht man z.B. mit 4522 ohne '
+              Follow:
+                3C:
+                  Desc: 6+C
+                3D:
+                  Desc: 4+D
+                3H:
+                  Desc: '2H / perhaps no diamond values?'
+                3S:
+                  Desc: 4+S
+                3N:
+                  Desc: 'to play'
             3C:
               Desc: 3+C
               Follow:
@@ -889,17 +1264,17 @@ opening:
                 3N:
                   Desc: 'to play'
                 4C:
-                  Desc: 'Max, asking for Ersatz-Turbo'
+                  Desc: 'Max, asking for Ersatz-Turbo  / ??? widerspruch zur Turbo-Regel'
             3D:
               Desc: 'Stopper, no Stopper in S'
             3H:
               Desc: 6+H
             3S:
-              Desc: 'Stopper, no Stopper in D'
+              Desc: 'Stopper, no Stopper in D '
             3N:
               Desc: 'to play'
         2N:
-          Desc: 'Stopper in remaing suits , 3-S'
+          Desc: 'Stopper in remaining suits , 3-S, 2-H'
         3C:
           Desc: '5+D, 2-H'
           Follow:
@@ -917,15 +1292,22 @@ opening:
             3H:
               Desc: 6+H
             3S:
-              Desc: 'ERROR, 4er Pik oder Stopper???'
+              Desc: '4+S / 4er Pik oder Stopper???'
             3N:
               Desc: 'to play'
         3D:
-          Desc: '4S, 4-anySuit, 2-H'
+          Desc: '4S, 4-A, 2-H'
+          Follow:
+            3H:
+              Desc: 6+H
+            3S:
+              Desc: 4+S
+            3N:
+              Desc: 'to play'
         3H:
-          Desc: '4H, Max, noShortness'
+          Desc: '4H, Max, 2+A'
         3S/4C/4D:
-          Desc: '4H, Max (Error???), shortness in bidsuit'
+          Desc: '4H, max, 1-bidsuit / ??? Was macht man mit Min?'
     2D:
       Desc: 5+D
       Follow:
@@ -1001,7 +1383,7 @@ opening:
         3N:
           Desc: '3-H, 3-S, Stoppers in M'
     2H:
-      Desc: '5+C, unbal.'
+      Desc: 5+C
       Follow:
         2P:
           Desc: 3+C
@@ -1071,6 +1453,114 @@ opening:
         Desc: 3+C
       2N:
         Desc: '11+, stopper in  D+H'
+  Follow:
+    1N:
+      Desc: '17-19 eor 24+, semibal eor 1444'
+    2C:
+      Desc: 5+H
+      Follow:
+        2D:
+          Desc: Waiting
+          Follow:
+            2H:
+              Desc: 6+H
+            2S:
+              Desc: 4+C
+              Follow:
+                2N:
+                  Desc: 'stopper in D / unlogisch> Stopper ????'
+                3C:
+                  Desc: 4+C
+                3D:
+                  Desc: 'Stopper in D'
+            2N:
+              Desc: 'waiting, nonmin'
+            3C:
+              Desc: 4+D
+              Follow:
+                3D:
+                  Desc: 4+D
+                3M:
+                  Desc: 'stopper / unlogisch ???'
+                3N:
+                  Desc: 'stopper in C /NIS'
+            3D:
+              Desc: 2S(>=Qx)
+            3H:
+              Desc: '6+, Losers<=5 / ab Semifording '
+        2H:
+          Desc: 3H
+          Follow:
+            2S:
+              Desc: 4+C
+              Follow:
+                3C:
+                  Desc: 4+C
+            2N:
+              Desc: 'wating, bal.'
+            3C:
+              Desc: 4+D
+            3D:
+              Desc: 2S(>=2Q)
+            3H:
+              Desc: '6H, nonmin'
+        2S:
+          Desc: 4+C
+          Follow:
+            3C:
+              Desc: 4+C
+        2N:
+          Desc: 'nonmin, stopper in CD'
+        3C:
+          Desc: 4+D
+          Follow:
+            3D:
+              Desc: 4+D
+        3D:
+          Desc: 6+S
+        3H:
+          Desc: '4+H, nonmin'
+        3S:
+          Desc: 'min, bal'
+          Follow:
+            3NT:
+              Desc: 16-20
+        3N:
+          Desc: 'min, stopper in CD'
+        4m:
+          Desc: '4+H, 8-11 / system change'
+    2D:
+      Desc: 5+D
+      Follow:
+        2H:
+          Desc: 4+H
+        2S:
+          Desc: 4+C
+        2N:
+          Desc: 'stopper in CH, nonmin'
+    2H:
+      Desc: 5+C
+    2S:
+      Desc: '3+S, min'
+    2N:
+      Desc: '22-23,1444 eor bal, 2-S'
+    3C:
+      Desc: '5+C, 5+D'
+      Follow: {}
+    3D:
+      Desc: '5+D, 5+H'
+    3H:
+      Desc: '3+S, single Honor '
+    3S:
+      Desc: '3+S, nonmin'
+      Follow:
+        3N:
+          Desc: 8-11
+        4m:
+          Desc: '12+, cuebid'
+    3N:
+      Desc: 'min, 2344 /NIS'
+  Desc: 'Bidding after 1C-1P'
 2NT-Follow:
   3C:
     Desc: '3+M / Muppet-Stayman'
@@ -1099,3 +1589,21 @@ opening:
     Desc: '6+C, SI'
   4S:
     Desc: '6+D, SI'
+Turbo:
+  Desc: Turbo
+  Follow:
+    S1:
+      Desc: 'even kcs'
+    S2:
+      Desc: 'uneven kcs'
+1C-2S-A-R-AskingPoints:
+  Desc: 'Asking for Points'
+  Follow:
+    S1:
+      Desc: 12-13
+    S2:
+      Desc: 14-15
+    S3:
+      Desc: 16-17
+StartCuebids:
+  Desc: 'Start with Cuebids and then Turbo'

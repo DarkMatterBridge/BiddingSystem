@@ -39,7 +39,7 @@ export class BiddingComponent implements OnInit {
     this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
     if (this.possibleBids.length == 0) {
        this.anchors = this.biddingSystem.findAllAnchors();
-        this.keys =  Array.from(this.biddingSystem.anchors.keys()); //   Object.keys(this.anchors);
+        this.keys =  Array.from(this.anchors.keys()); 
         }
     } 
 
@@ -50,10 +50,11 @@ export class BiddingComponent implements OnInit {
   }
 
   addAnchor(i) {
+    this.biddingSystem.addAnchor(i);
+  }
 
-    var obid = this.biddingSystem.getBidByIndex(i);
-    obid[1]["Anchor"] = this.biddingSystem.maxAnchor + 1;
-    this.biddingSystem.findAllAnchors(); 
+  removeAnchor(i) {
+    this.biddingSystem.removeAnchor(i);
   }
 
   hasAnchor(i) {
@@ -61,8 +62,24 @@ export class BiddingComponent implements OnInit {
       return obid[1]["Anchor"] != undefined;
   }
 
+  getAttachedDesc(i) {
+    if (this.isAttached(i))
+        return this.biddingSystem.getAttachedNode(this.biddingSystem.getBidByIndex(i)[1])["Desc"];
+    else 
+        return "";
+  }
+
+  isAttached(i) {
+    return this.biddingSystem.followIsAttachedNode(this.biddingSystem.getBidByIndex(i)[1]);
+  }
+
   startBidding() {
     this.possibleBids = this.biddingSystem.startBidding();
+    this.bidding.cutBidding(-1);
+  }
+
+  startRootBidding() {
+    this.possibleBids = this.biddingSystem.startRootBidding();
     this.bidding.cutBidding(-1);
   }
 
@@ -72,9 +89,17 @@ export class BiddingComponent implements OnInit {
     this.bid = "";
     this.desc = "";
   }
+  
+  removeBid(i) {
+    var bidname  =  this.biddingSystem.getBidByIndex(i)[0];
+    delete this.biddingSystem.currentNode["Follow"][bidname];
+    this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
+    this.anchors = this.biddingSystem.findAllAnchors();
+}
 
 
   attachAnchor(anchor) {
+    alert(anchor);
     this.biddingSystem.attachAnchorToCurrentNode(anchor);
     this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
   }
@@ -91,7 +116,7 @@ export class BiddingComponent implements OnInit {
     }
     fileReader.readAsText(file);
   }
-
+ 
   showBiddingSystemAsJson() {
     var we = window.open("", "hallo");
     we.document.write(JSON.stringify(this.biddingSystem.systemHierarchy));
@@ -102,7 +127,7 @@ export class BiddingComponent implements OnInit {
     var blob = new Blob([text], { type: 'text/plain' });
     var anchor = document.createElement('a');
     anchor.download = "bs.json";
-    anchor.href = (window.webkitURL || window.URL).createObjectURL(blob);
+    anchor.href = (window.URL).createObjectURL(blob);
     anchor.dataset.downloadurl = ['text/plain', anchor.download, anchor.href].join(':');
     anchor.click();
   }

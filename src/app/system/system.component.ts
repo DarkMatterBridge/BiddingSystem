@@ -226,7 +226,7 @@ export class SystemComponent implements OnInit {
       anchor = document.createElement('a');
 
     anchor.download = "bs.json";
-    anchor.href = (window.webkitURL || window.URL).createObjectURL(blob);
+    anchor.href = (window.URL).createObjectURL(blob);
     anchor.dataset.downloadurl = ['text/plain', anchor.download, anchor.href].join(':');
     anchor.click();
   }

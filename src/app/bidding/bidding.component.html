@@ -11,21 +11,26 @@
     <ul>
         <li *ngFor="let bid of possibleBids; let i = index ">
           <a [routerLink]="" (click)="select(i)"> {{bid[0]}}  </a>:
-            {{bid[1]["Desc"]}}
+          {{bid[1]["Desc"]}} {{getAttachedDesc(i)}} {{isAttached(i)}}    
         </li>
     </ul>
 </div>
 
 <div *ngIf="editMode">
+    <button (click)="startRootBidding()"> Start From Root </button>
     biddingRoot todo
     <ul>
         <li *ngFor="let bid of possibleBids; let i = index ">
             <a [routerLink]="" (click)="select(i)"> {{bid[0]}}  </a>:
             <input [(ngModel)]="bid[1]['Desc']" size="60"/>
+            {{getAttachedDesc(i)}}
 
-            <a *ngIf="!hasAnchor(i)" [routerLink]="" (click)="addAnchor(i)"> Add Anchor  </a>
+            <a *ngIf="!hasAnchor(i)" [routerLink]="" (click)="addAnchor(i)"> Add as Anchor  </a>
+            <a *ngIf="hasAnchor(i)" [routerLink]="" (click)="removeAnchor(i)"> Remove Anchor  </a>
+            <a  [routerLink]="" (click)="removeBid(i)"> Remove Bid  </a>
           </li>
-        <li><input [(ngModel)]="bid" size="5" /><input [(ngModel)]="desc" size="60"/> <a [routerLink]="" (click)="addBid()"> Add </a>
+        <li><input [(ngModel)]="bid" size="5" /><input [(ngModel)]="desc" size="60"/>
+            <button (click)=addBid()> Add </button>
         </li>
     </ul>
     <div *ngIf="possibleBids.length ==0"> Add a RootBranches
