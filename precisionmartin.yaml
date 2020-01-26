@@ -59,16 +59,19 @@ opening:
       Follow:
         1D:
           Desc: 0-7
-          Link: 
-            1C-1D : normal
+          Link:
+            1C-1D: normal
+          Follow: {}
         1H:
           Desc: '8-11, 4-S'
-          Link: 
-            1C-1H : normal
+          Link:
+            1C-1H: normal
+          Follow: {}
         1S:
           Desc: '8+, 5+S'
-          Link: 
-            1C-1P : normal
+          Link:
+            1C-1P: normal
+          Follow: {}
         1N:
           Desc: '12+, 5+C'
           Follow:
@@ -244,7 +247,7 @@ opening:
               Desc: 'todo / legt Trumpffarbe fest, Cuebids'
             4C:
               Desc: 6+C(<=1Loser)
-              Link: 
+              Link:
                 Turbo: normal
             4D:
               Desc: 3+D
@@ -320,7 +323,7 @@ opening:
               Desc: /nis
             4m:
               Desc: 'Turbosuit:=m'
-              Link: 
+              Link:
                 Turbo: normal
         2H:
           Desc: '14+, bal.'
@@ -330,12 +333,12 @@ opening:
             2N:
               Desc: 5+H
             3C:
-              Link: 
-                0 : normal
+              Link:
+                '0': normal
             3D:
               Desc: ""
-              Link: 
-                1 : normal
+              Link:
+                '1': normal
             3M:
               Desc: '4+M, 5+C'
               Follow:
@@ -350,12 +353,10 @@ opening:
                 4N:
                   Desc: '3343, nonmin'
             4C:
-              Link: 
-                3 :normal
+              Link: '3 :normal'
             4D:
               Desc: ""
-              Link: 
-                4 :normal
+              Link: '4 :normal'
             3N:
               Desc: '4333, min'
               Follow:
@@ -367,8 +368,7 @@ opening:
                       Follow:
                         S1:
                           Desc: 'requests Turbo'
-                          Link: 
-                            Turbo :normal
+                          Link: 'Turbo :normal'
         2S:
           Desc: '12+, 4441'
           Follow:
@@ -380,16 +380,13 @@ opening:
                   Follow:
                     S1/ex3N:
                       Desc: 'asking '
-                      Link: 
-                        1C-2S-A-R-AskingPoints :normal
+                      Link: '1C-2S-A-R-AskingPoints :normal'
                     S2/ex3N:
                       Desc: 'asking, 4+ midSuit'
-                      Link: 
-                        1C-2S-A-R-AskingPoints :normal
+                      Link: '1C-2S-A-R-AskingPoints :normal'
                     S3/ex3N:
                       Desc: 'asking, 4+ highSuit'
-                      Link: 
-                        1C-2S-A-R-AskingPoints :normal
+                      Link: '1C-2S-A-R-AskingPoints :normal'
                     3N:
                       Desc: 'to play'
         2N:
@@ -428,22 +425,22 @@ opening:
                           Follow:
                             4D:
                               Desc: '4C, requests Turbo'
-                              Link: 
+                              Link:
                                 Turbo: normal
                             4H:
                               Desc: '4D, requests Turbo'
-                              Link: 
+                              Link:
                                 Turbo: normal
                         4D:
                           Desc: '4C,4D,12'
                           Follow:
                             4H:
                               Desc: '4C, requests Turbo'
-                              Link: 
+                              Link:
                                 Turbo: normal
                             4S:
                               Desc: '4D, requests Turbo'
-                              Link: 
+                              Link:
                                 Turbo: normal
                     3S:
                       Desc: '???'
@@ -487,7 +484,7 @@ opening:
                           Desc: '3-C, 3-D'
                     4H:
                       Desc: '4S, requests Turbo / nis '
-                      Link: 
+                      Link:
                         Turbo: normal
                     4S:
                       Desc: 'to play'
@@ -506,7 +503,7 @@ opening:
                       Desc: 'to play'
                     4S:
                       Desc: '4H, requests Turbo'
-                      Link: 
+                      Link:
                         Turbo: normal
                 3N:
                   Desc: '4H, 4S'
@@ -576,12 +573,12 @@ opening:
             4C:
               Desc: '6+C / Change'
               Anchor: '3'
-              Link: 
+              Link:
                 Turbo: normal
             4D:
               Desc: '6+D / Change'
               Anchor: '4'
-              Link: 
+              Link:
                 Turbo: normal
         3C:
           Desc: '10+, any solid suid with max one side king'
@@ -637,19 +634,597 @@ opening:
     1D:
       Desc: '11-15, 2+D'
       Link:
-        1DOpening : normal
+        1DOpening: normal
+      Follow:
+        1H:
+          Desc: 4+H
+          Follow:
+            1S:
+              Desc: 4+S
+              Follow:
+                1N:
+                  Desc: 8-10
+                2C:
+                  Desc: 'inv or 5+H, 4+A, weak'
+                  Follow:
+                    2D:
+                      Desc: 1-H
+                      Follow:
+                        pass:
+                          Desc: '4+D, 5+H, 4-9'
+                        2H:
+                          Desc: 11-13
+                          Follow:
+                            2S:
+                              Desc: 11-13
+                            2N:
+                              Desc: '4144, 14-15'
+                            3C:
+                              Desc: '5+C, 14-15'
+                            3D:
+                              Desc: '5+D,14-15'
+                            3H:
+                              Desc: '0H, 14-15'
+                            3S:
+                              Desc: '5+S, 6+D, 13-15'
+                        2S:
+                          Desc: '3+S, 5+H, 4-9'
+                        2N:
+                          Desc: '0544, 4-9'
+                        3C:
+                          Desc: '5+C, 4-9'
+                    2H:
+                      Desc: 2+H
+                      Follow:
+                        passe:
+                          Desc: '5+H, 6-9'
+                        2S:
+                          Desc: '4+S, inv'
+                        2N:
+                          Desc: '5H, inv'
+                        3m:
+                          Desc: '5+m, inv'
+                        3H:
+                          Desc: '6+H, inv // schlechtere Qualität'
+                2D:
+                  Desc: GF
+                  Follow:
+                    2H:
+                      Desc: 2+H
+                      Follow:
+                        2S:
+                          Desc: 4H
+                          Follow:
+                            2N:
+                              Desc: '4-C, 4-D // d.h. wohl 11-13 bal. '
+                              Follow:
+                                3m:
+                                  Desc: 4+m
+                                3M:
+                                  Desc: 'stopper in M, no stopper in aM'
+                            3m:
+                              Desc: 5+m
+                        2N:
+                          Desc: '5+H, 4+C'
+                          Follow:
+                            3C:
+                              Desc: 4+C
+                            3D:
+                              Desc: '3-C, 3H'
+                            3H:
+                              Desc: '4261'
+                            3S:
+                              Desc: '4351'
+                            3N:
+                              Desc: '4243 or 4252'
+                        3C:
+                          Desc: '5+H, 4+D'
+                          Follow:
+                            3D:
+                              Desc: 4+D
+                            3H:
+                              Desc: '3-D, 3H'
+                            3S:
+                              Desc: '4225'
+                            3N:
+                              Desc: '4234'
+                        3D:
+                          Desc: '4+S, SI'
+                          Follow:
+                            3H:
+                              Desc: Cuebid
+                        3H:
+                          Desc: '6+H, SI'
+                          Follow:
+                            3S:
+                              Desc: cuebid
+                            3N:
+                              Desc: unserious
+                            3m:
+                              Desc: cuebid
+                            4H:
+                              Desc: 10-11
+                        3S:
+                          Desc: 5H
+                          Follow:
+                            3N:
+                              Desc: 2H
+                            4H:
+                              Desc: 3H
+                        3N:
+                          Desc: '18-20, bal, SI'
+                    2S:
+                      Desc: '11-13, 1-H'
+                      Follow:
+                        2N:
+                          Desc: asking
+                          Follow:
+                            3C:
+                              Desc: '5C, 11-13'
+                            3D:
+                              Desc: '5+D, 11-13'
+                            3H:
+                              Desc: '0H, 40(45)'
+                            3S:
+                              Desc: '5S, 6D, 11-13'
+                            3N:
+                              Desc: '4144, 11-13'
+                    2N:
+                      Desc: '14-15, 4144'
+                    3C:
+                      Desc: '5C, 1H, 14-15'
+                      Follow: {}
+                    3D:
+                      Desc: '5+D, 1H, 14-15'
+                    3H:
+                      Desc: '0H, 40(45), 14-15'
+                    3S:
+                      Desc: '5S, 6D, 13-15'
+                2H:
+                  Desc: '6+H, 6-10'
+                2S:
+                  Desc: '6-9, 4+S'
+                2N:
+                  Desc: '12-13, 4H'
+                3C:
+                  Desc: ""
+                3D:
+                  Desc: ""
+                3H:
+                  Desc: '11-13, 6+H(>KQJxxx)'
+                3S:
+                  Desc: '13, 4+S // stark einladend'
+                3N:
+                  Desc: 'to play'
+                4H:
+                  Desc: 'to play'
+                4S:
+                  Desc: 'to play'
+            1N:
+              Desc: '11-13, 3-S'
+              Follow:
+                2C:
+                  Desc: 'GF, 4H or inv'
+                  Follow:
+                    2D:
+                      Desc: must
+                      Follow:
+                        passe:
+                          Desc: '5+D, 6-9'
+                        2H:
+                          Desc: '5H, inv'
+                        2S:
+                          Desc: '4H, 5+C, inv+'
+                          Follow:
+                            2N:
+                              Desc: 'min, 2-C'
+                            3C:
+                              Desc: 'min, 3+C'
+                              Follow:
+                                3D:
+                                  Desc: 1-D
+                                3H:
+                                  Desc: 1-S
+                                3N:
+                                  Desc: '2+D, 2+S'
+                                4C:
+                                  Desc: Turbo
+                            3D:
+                              Desc: 'max, 3+C // guter Trefffit'
+                              Follow:
+                                3H:
+                                  Desc: 1-D
+                                3S:
+                                  Desc: 1-S
+                                3N:
+                                  Desc: '2+D, 2+S'
+                                4C:
+                                  Desc: Turbo
+                            3N:
+                              Desc: 'max, to play'
+                        2N:
+                          Desc: '(4441) xor (4450), GF'
+                          Follow:
+                            3C:
+                              Desc: asking
+                              Follow:
+                                3D:
+                                  Desc: 1-C
+                                  Follow:
+                                    3H:
+                                      Desc: 4+D
+                                    3N:
+                                      Desc: 'double stopper in C'
+                                3H:
+                                  Desc: 1-D
+                                  Follow:
+                                    3S:
+                                      Desc: 4+C
+                                    3N:
+                                      Desc: 'double stopper'
+                                3S:
+                                  Desc: 1-S
+                                  Follow:
+                                    3N:
+                                      Desc: 'double stopper in S'
+                                    4m:
+                                      Desc: 4+m
+                        3C:
+                          Desc: '4H, 5+D, inv'
+                          Follow:
+                            3D:
+                              Desc: min
+                            3H:
+                              Desc: 'max, 3+D, C stopper, no H stopper'
+                            3S:
+                              Desc: 'max, 3+D,H stopper, no C stopper'
+                            3N:
+                              Desc: 'max, 3+D, C stopper, H stopper'
+                            4D:
+                              Desc: 'max, 5+D'
+                        3D:
+                          Desc: '4H, 6+D, GF'
+                          Follow:
+                            3H:
+                              Desc: asking
+                              Follow:
+                                3S:
+                                  Desc: '1-C, 2+S'
+                                3N:
+                                  Desc: '1-S, 2+C'
+                                4C:
+                                  Desc: '1-C, 1-S'
+                        3H:
+                          Desc: '3451, GF'
+                          Follow: {}
+                        3S:
+                          Desc: '1453, GF'
+                        3N:
+                          Desc: '2524, GF, S(<Qx), D(<Qx)'
+                2D:
+                  Desc: 'GF, 5+H'
+                  Follow:
+                    2H:
+                      Desc: Max
+                      Follow:
+                        2S:
+                          Desc: bal
+                          Follow:
+                            2N:
+                              Desc: 'max, 4-C, 4-D, 2-H'
+                            3m:
+                              Desc: '5+m, 2-3H'
+                            3H:
+                              Desc: '4-C, 4-D, 3H'
+                            3N:
+                              Desc: 'min, 4-C, 4-D, 2-H'
+                        2N:
+                          Desc: 4+C
+                          Follow:
+                            3C:
+                              Desc: 4+C
+                            3D:
+                              Desc: 3H
+                            3H:
+                              Desc: 'D stopper, no S stopper'
+                            3S:
+                              Desc: 'S stopper, no D stopper'
+                            3N:
+                              Desc: 'D stopper, S stopper'
+                        3C:
+                          Desc: 4+D
+                          Follow:
+                            3D:
+                              Desc: 4+D
+                            3H:
+                              Desc: 3H
+                        3D:
+                          Desc: '4S, 6+H, '
+                          Follow:
+                            3H:
+                              Desc: interest
+                            3S:
+                              Desc: cuebid
+                            3N:
+                              Desc: 'no interest'
+                        3H:
+                          Desc: '6+H, SI'
+                          Follow:
+                            3S:
+                              Desc: cuebid
+                            3N:
+                              Desc: unserious
+                            4m:
+                              Desc: cuebid
+                            4H:
+                              Desc: min
+                        3S:
+                          Desc: 5H
+                          Follow:
+                            3N:
+                              Desc: 2H
+                            4H:
+                              Desc: 3H
+                        3N:
+                          Desc: 'to play'
+                    2S:
+                      Desc: Min
+                2H:
+                  Desc: 'to play'
+                2S:
+                  Desc: '6H, 4S, inv'
+                2N:
+                  Desc: '12-13, 4H'
+                3m:
+                  Desc: '6+m, to play'
+                3H:
+                  Desc: '6+H, inv'
+                3N:
+                  Desc: 'to play'
+                4m:
+                  Desc: '4m, 6H, mild SI'
+            2C:
+              Desc: '4+C, 5+D or 5+C, 4+D, or (41)(35)'
+              Follow:
+                2D:
+                  Desc: 'to play'
+                2H:
+                  Desc: '5+H, 6-10'
+                2S:
+                  Desc: GF
+                  Follow:
+                    2N:
+                      Desc: 31(54)
+                    3C:
+                      Desc: '5+C, 5+D'
+                    3D:
+                      Desc: 22(54)
+                      Follow:
+                        3S:
+                          Desc: 'asking for half stopper'
+                    3H:
+                      Desc: '1345'
+                    3S:
+                      Desc: '1354'
+                    3N:
+                      Desc: '0355, min'
+                    4C:
+                      Desc: '0355, max'
+                3m:
+                  Desc: '4+m, invit'
+            2D:
+              Desc: '6+D, 4-C'
+              Follow:
+                2H:
+                  Desc: '6+, 8-10'
+                2S:
+                  Desc: inv+
+                  Follow:
+                    3H:
+                      Desc: 3H
+                3C:
+                  Desc: 'C values, GF'
+            2H:
+              Desc: '4+H or 3H'
+              Follow:
+                2S:
+                  Desc: inv
+                  Follow:
+                    2N:
+                      Desc: '11-12, 3433'
+                    3C:
+                      Desc: '3H, 13(54)'
+                    3D:
+                      Desc: '3H, 6+D'
+                    3H:
+                      Desc: '4H, min'
+                    3N:
+                      Desc: '4H, max, cog'
+                    4H:
+                      Desc: '4H, max'
+                2N:
+                  Desc: GF
+                  Follow:
+                    3C:
+                      Desc: 'min, 3H'
+                      Follow:
+                        3D:
+                          Desc: 4+D
+                        3H:
+                          Desc: SI
+                          Follow:
+                            3S:
+                              Desc: cuebid
+                            4N:
+                              Desc: cuebid
+                        3S:
+                          Desc: 4+S
+                        4C:
+                          Desc: 5+C
+                    3D:
+                      Desc: 'max, 3H'
+                      Follow:
+                        3H:
+                          Desc: SI
+                        3S:
+                          Desc: 4S
+                        3N:
+                          Desc: 'to play'
+                        4m:
+                          Desc: 5+m
+                    3H:
+                      Desc: 'min, 4H'
+                      Follow:
+                        3S:
+                          Desc: asking
+                          Follow:
+                            4m:
+                              Desc: 4+m
+                            4H:
+                              Desc: '3433'
+                    3S:
+                      Desc: 'max, 4H'
+                      Follow:
+                        3N:
+                          Desc: asking
+                        4m:
+                          Desc: 4+m
+                        4H:
+                          Desc: '3433'
+                3m:
+                  Desc: 'SI, 4+m, 5H'
+                  Follow:
+                    4m:
+                      Desc: 4+m
+                    3A:
+                      Desc: 'cuebid '
+                3H:
+                  Desc: 'SI, 4+S, 5H'
+                  Follow:
+                    3S:
+                      Desc: 4S
+                    4m:
+                      Desc: cuebid
+        1S:
+          Desc: 4+S
     1H:
       Desc: '11-15, 5+bidsuit'
       Link:
-        1HOpening : normal
+        1HOpening: normal
+      Follow:
+        1S:
+          Desc: '5-S, 6-13'
+          Follow:
+            1N:
+              Desc: '5H, 3+C'
+              Follow:
+                pass:
+                  Desc: '5-8, 2-H, 3-C'
+                2C:
+                  Desc: '5-10, 4+C, 1-H'
+                2D:
+                  Desc: 'puppet to 2H'
+                  Follow:
+                    2H:
+                      Desc: must
+                      Follow:
+                        passe:
+                          Desc: '6-9, 2H'
+                        2S:
+                          Desc: '12-13, 4C, 1-H'
+                        2N:
+                          Desc: '12-13, 5C, 2H'
+                        3C:
+                          Desc: '12-13, 5C, 1H'
+                2H:
+                  Desc: '10-11, 2H'
+                2S:
+                  Desc: '12-13, 2H, 4C'
+                2N:
+                  Desc: '12-13 bal, 2H, 3-C'
+                3C:
+                  Desc: '7-9, 5C, to play'
+                3D:
+                  Desc: '6+D, to play'
+            2C:
+              Desc: '4+D, or 3532'
+              Follow:
+                2D:
+                  Desc: 'to play'
+                2H:
+                  Desc: 'to play'
+                2S:
+                  Desc: '10-12, 4D'
+                2N:
+                  Desc: ' 12-13, bal'
+                3C:
+                  Desc: 'to play'
+                3D:
+                  Desc: '10-12, 5D'
+                3H:
+                  Desc: inv
+            2D:
+              Desc: 4S
+              Follow:
+                2H:
+                  Desc: 'to play'
+                2S:
+                  Desc: ' to play'
+                2N:
+                  Desc: 'asking for shortness'
+            2H:
+              Desc: '10-13, 6+H'
+            2S:
+              Desc: '6+H,5S'
+            3m:
+              Desc: '5+H,5+m'
+            3H:
+              Desc: '13-15, 6+H'
+        2C:
+          Desc: '9-13, 5+S'
+          Follow:
+            2D:
+              Desc: 10-13
+              Follow:
+                2H:
+                  Desc: '2H, to play'
+                2S:
+                  Desc: '6S, to play'
+                2N:
+                  Desc: '5S, 1-H, // wie stark?'
+                3m:
+                  Desc: 4+m
+                3H:
+                  Desc: 2H(>KX)
+                3S:
+                  Desc: '6+S, 12-13'
+            2H:
+              Desc: '10-13, 6H'
+            2S:
+              Desc: '10-13, 2S or 10-11, 3S // Hypermin ????'
+            2N:
+              Desc: '14-15, 2-S'
+            3m:
+              Desc: '14-15, 5+m'
+            3H:
+              Desc: '14-15, 6H'
+            3S:
+              Desc: '14-15, 3+S'
     1S:
       Desc: '11-15, 5+bidsuit'
       Link:
-        1SOpening : normal
+        1SOpening: normal
+      Follow:
+        '2C ':
+          Desc: 'GF, 13+'
+          Follow: {}
+          Link:
+            1M-GFAsking: normal
     2C:
       Desc: '11-15, 6+C'
       Link:
-        2COpening : normal
+        2COpening: normal
+      Follow: {}
     2N:
       Desc: '22-23, bal.'
       Prio: 100
@@ -658,6 +1233,206 @@ opening:
       Follow:
         2C:
           Desc: Stayman
+          Follow:
+            2D:
+              Desc: '3-H, 3-S'
+              Follow:
+                2H:
+                  Desc: '4+H,4+S, weak'
+                2S:
+                  Desc: '5S, inv'
+                2N:
+                  Desc: 'inv, semibal'
+                3C:
+                  Desc: 'gf, 1-m'
+                  Follow:
+                    3D:
+                      Desc: forced
+                      Follow:
+                        3H:
+                          Desc: 1-C
+                          Follow:
+                            3S:
+                              Desc: med
+                            3N:
+                              Desc: min
+                            4C:
+                              Desc: top
+                          Anchor: '4'
+                        3S:
+                          Desc: 1-D
+                          Follow:
+                            3N:
+                              Desc: min
+                            3C:
+                              Desc: med
+                            3D:
+                              Desc: top
+                          Anchor: '5'
+                        3N:
+                          Desc: '1-D, '
+                          Follow:
+                            pass:
+                              Desc: 'min or medium'
+                            4C:
+                              Desc: top
+                3D:
+                  Desc: 'gf, 6m, 4M'
+                  Follow:
+                    3H:
+                      Desc: forced
+                      Follow:
+                        3S:
+                          Desc: 6+C
+                          Follow: {}
+                        3N:
+                          Desc: 6+D
+                        4C:
+                          Desc: '6+D, SI'
+                      Anchor: '8'
+                3H:
+                  Desc: 'gf, 4S, 1H, 5-C, 5-D'
+                  Follow:
+                    3N:
+                      Desc: 'to play'
+                    4C:
+                      Desc: 3+C
+                    4D:
+                      Desc: '2-C,4D'
+                    4H:
+                      Desc: '4C,4D, C>D'
+                    4S:
+                      Desc: '4C,4D, D>C'
+                    5m:
+                      Desc: 5+m
+                  Anchor: '6'
+                3S:
+                  Desc: 'gf, 1S, 4H, 5-C, 5-D'
+                  Follow: {}
+                  Link:
+                    '6': normal
+                3N:
+                  Desc: 'to play'
+                4H:
+                  Desc: '5S, 5H'
+            2H:
+              Desc: 4H
+              Follow:
+                2S:
+                  Desc: '5S, inv'
+                2N:
+                  Desc: '4S, inv'
+                3C:
+                  Desc: '1-m or 1-H'
+                  Follow:
+                    3D:
+                      Desc: forced
+                      Follow:
+                        3H:
+                          Desc: '4351'
+                          Follow: {}
+                          Link:
+                            '4': normal
+                        3S:
+                          Desc: '4315'
+                          Follow: {}
+                          Link:
+                            '5': normal
+                        3N:
+                          Desc: '4S, 1-H, 4+D, 4+C'
+                          Follow:
+                            pass:
+                              Desc: min
+                            4m:
+                              Desc: 4+m
+                              Follow: {}
+                              Link:
+                                Turbo: normal
+                          Anchor: '7'
+                3D:
+                  Desc: 6+m
+                  Follow:
+                    3H:
+                      Desc: forced
+                      Follow: {}
+                      Link:
+                        '8': normal
+                3H:
+                  Desc: '4H, inv'
+                3S:
+                  Desc: 'gf, 4H, 1-D xor 1-S'
+                  Follow:
+                    3N:
+                      Desc: asking
+                      Follow:
+                        4C:
+                          Desc: 1-D
+                        4H:
+                          Desc: 1-S
+                3N:
+                  Desc: 'to play'
+                4C:
+                  Desc: '1-C, 4H, SI'
+                  Follow:
+                    4H:
+                      Desc: min
+                    4D:
+                      Desc: cuebid
+                    4S:
+                      Desc: cuebid
+                    4NT:
+                      Desc: 'Turbo?'
+                4D:
+                  Desc: 'SI, bal'
+            2S:
+              Desc: '4S,3-H'
+              Follow:
+                2N:
+                  Desc: '4H, 3-S, inv'
+                3C:
+                  Desc: '1-S or 1-m'
+                  Follow:
+                    3D:
+                      Desc: forced
+                      Follow:
+                        3H:
+                          Desc: '3451'
+                          Follow: {}
+                          Link:
+                            '4': normal
+                        3S:
+                          Desc: '3415'
+                          Follow: {}
+                          Link:
+                            '5': normal
+                        3N:
+                          Desc: '1-S,4H,4+C,4+D'
+                          Follow:
+                            passe:
+                              Desc: min
+                            4m:
+                              Desc: 4+m
+                              Follow: {}
+                              Link:
+                                Turbo: normal
+                3D:
+                  Desc: '6+m, 4H'
+                  Follow:
+                    3H:
+                      Desc: forced
+                      Follow: {}
+                      Link:
+                        '8': normal
+                3H:
+                  Desc: '4+S, 1-D xor 1-H, SI'
+                3S:
+                  Desc: '4S, inv'
+                3N:
+                  Desc: 'to play'
+                4C:
+                  Desc: '4S, 1-C'
+                4D:
+                  Desc: 'SI, bal // Weiterreizung seltsam???'
         2D:
           Desc: 5+H
         2H:
@@ -670,6 +1445,74 @@ opening:
             3C:
               Desc: max
               Follow: {}
+              Link:
+                anchor: normal
+        2N:
+          Desc: Asking
+          Follow:
+            3C:
+              Desc: '4-S, 4-H'
+              Follow:
+                3D:
+                  Desc: (31)(54)
+                  Follow:
+                    3H:
+                      Desc: asking
+                      Follow:
+                        3S:
+                          Desc: 1-H
+                        3N:
+                          Desc: 1-S
+                3H:
+                  Desc: '4S, 3-H'
+                  Follow: {}
+                3S:
+                  Desc: '4H, 3-S'
+                3N:
+                  Desc: 'to play'
+                4m:
+                  Desc: '5332, SI'
+                  Follow:
+                    4N:
+                      Desc: 'no intererest'
+                  Link:
+                    Turbo: normal
+            3D:
+              Desc: '???'
+            3H:
+              Desc: 5H
+            3S:
+              Desc: 5S
+              Follow: {}
+        3C:
+          Desc: 6+D
+          Follow:
+            3D:
+              Desc: forced
+              Follow:
+                3M:
+                  Desc: 1-M
+                3N:
+                  Desc: '2+C, 2+H, 2+S, SI-'
+                4C:
+                  Desc: '1165, SI'
+                4D:
+                  Desc: Turbo
+        3D:
+          Desc: '6+D, 1-C'
+          Follow:
+            3N:
+              Desc: min
+            3H:
+              Desc: max
+            3S:
+              Desc: med
+        3M:
+          Desc: '1-M,5+C,5+D, !11(56)'
+        4C:
+          Desc: '6+H, !SI'
+        4D:
+          Desc: '6+S, !SI'
   Desc: 'the root of all bidding'
 1DOpening:
   Follow:
@@ -681,14 +1524,10 @@ opening:
 1HOpening:
   Follow:
     1N:
-      Desc: '8-12, 2-H'
-      Follow:
-        passe:
-          Desc: 11-13
-        2C:
-          Desc: 4+C
-        2D:
-          Desc: 4+D
+      Desc: 'GF, asking'
+      Follow: {}
+      Link:
+        1M-GFAsking: normal
   Desc: 'Bidding after 1Heart'
 1SOpening:
   Follow:
@@ -706,6 +1545,7 @@ opening:
   Follow:
     2D:
       Desc: Asking
+      Follow: {}
   Desc: 'Bidding after 2Clubs'
 1C-1D:
   Follow:
@@ -864,10 +1704,10 @@ opening:
                 3N:
                   Desc: 'stopper in unbid suits'
                 Hebung:
-                  Desc: 3+G<lastsuit> / Ersatzturbo
+                  Desc: '3+G<lastsuit> / Ersatzturbo'
             3H:
               Desc: 'GF / requests cuebids , unserious'
-              Link: 
+              Link:
                 cue_unserious: normal
             4H:
               Desc: 'to play'
@@ -932,7 +1772,7 @@ opening:
             4S:
               Desc: 'to play'
         2C:
-          Desc: '6-7, 3-S'
+          Desc: '6-7, 2-S'
           Follow:
             2D:
               Desc: 'waiting, 16-17'
@@ -975,7 +1815,7 @@ opening:
             3N:
               Desc: 'to play'
         2D:
-          Desc: '5-7, 3S, no 5H'
+          Desc: '5-7, 3S, 4-H'
           Follow:
             2H:
               Desc: '4+H, F1'
@@ -1004,7 +1844,7 @@ opening:
             3P:
               Desc: 'GF / requests cuebids , unserious'
               Link:
-                 cue_unserious: normal
+                cue_unserious: normal
             4P:
               Desc: 'to play'
         2H:
@@ -1012,7 +1852,7 @@ opening:
         2S:
           Desc: '0-4, 4+S'
         2N:
-          Desc: '5-7, 5+S or 4S with shortness'
+          Desc: '5-7, 5+S or 5-8, 4S with shortness'
         3m:
           Desc: '5-7, 6+ with 2 honours'
         3H:
@@ -1100,8 +1940,8 @@ opening:
           Follow:
             2N:
               Desc: '24+, bal.'
-              Link: 
-                2NT-Follow : normal
+              Link:
+                2NT-Follow: normal
             3C:
               Desc: 'GF with H, 4+D'
             3D:
@@ -1133,7 +1973,7 @@ opening:
     2N:
       Desc: '22-23, bal.'
       Link:
-        2NT-Follow : normal
+        2NT-Follow: normal
     3C:
       Desc: 'GF in C,  3-M'
       Follow:
@@ -1184,8 +2024,21 @@ opening:
           Desc: '5-7, 3+D, 1-bidsuit'
     3H:
       Desc: '55 in M, inv.'
+      Follow: {}
+      Link:
+        '9': normal
     3S:
       Desc: '55 in M, GF'
+      Follow:
+        3N:
+          Desc: 'to play'
+        4C:
+          Desc: 'max, 3+H'
+        4D:
+          Desc: 'max, 4+S'
+        4M:
+          Desc: 'to play'
+      Anchor: '9'
     3N:
       Desc: 'to play'
     4C:
@@ -1199,8 +2052,9 @@ opening:
       Follow:
         1N:
           Desc: waiting
+          Follow: {}
         2m/H:
-          Desc: '5+bidsuit  //vernünftige 5er Länge'
+          Desc: '5+bidsuit  //vernünftige 5er Länge, 3S noch möglich'
           Follow: {}
         2S:
           Desc: '8-10, 3+'
@@ -1211,7 +2065,7 @@ opening:
                 3m/H:
                   Desc: 'concentrated values'
                 3S:
-                  Desc: 'min, not (4333)'
+                  Desc: 'not (4333)  / ? min macht keinen Sinn'
                 3N:
                   Desc: (4333)
         2N:
@@ -1524,8 +2378,7 @@ opening:
       Desc: 4441
     2N:
       Desc: '22-23, bal.'
-      Link: 
-        2NT-Follow :normal
+      Link: '2NT-Follow :normal'
 1C-1P:
   1N:
     Desc: '17-19 or 24+, bal. ; natürlich Weterreizung'
@@ -1709,3 +2562,115 @@ Turbo:
       Desc: 16-17
 StartCuebids:
   Desc: 'Start with Cuebids and then Turbo'
+1M-GFAsking:
+  Desc: 'GF asking bid after 1M'
+  Follow:
+    '1':
+      Desc: 'bal, 11-13 or 5440a or 4+(bidsuit-1)'
+      Follow:
+        '1':
+          Desc: asking
+          Follow:
+            '1':
+              Desc: 'bal or 5440a'
+            '2':
+              Desc: 1-Low
+            '3':
+              Desc: '2Low, 2High or 1Low, 1High or 0Low, 0High'
+            '4':
+              Desc: '1-Low, 3High'
+            '5':
+              Desc: '5M, 5Secondsuit, 1High, 2Low'
+            '6':
+              Desc: '6M, 4Secondsuit, 1High, 2Low'
+            '7':
+              Desc: '5M, 5Secondsuit, 0High, 3Low'
+            '8':
+              Desc: '6M, 4Secondsuit, 0High, 3Low'
+            '9':
+              Desc: '6M, 5Secondsuit, 0High, 2Low'
+            '10':
+              Desc: '7M, 4Secondsuit, 0High, 2Low'
+    '2':
+      Desc: 4+C
+    '3':
+      Desc: '4+(bidsuit[S]>D,bidsuit[H]>S)'
+    '4':
+      Desc: '6+bidsuit, 2+A'
+    '5':
+      Desc: '6+bidsuit, 1-C'
+      Follow:
+        '1':
+          Desc: relay
+          Follow:
+            '1':
+              Desc: '(63)31 : F(3suits)'
+              Follow: {}
+              Link:
+                SuitDetermination3: normal
+            '2':
+              Desc: '73)21 or (72)31'
+            '3':
+              Desc: '(73)30, min'
+            '4':
+              Desc: '(73)30, max'
+    '6':
+      Desc: '6+bidsuit, 1-D'
+      Follow:
+        '1':
+          Desc: relay
+          Follow:
+            '1':
+              Desc: (36)13
+            '2':
+              Desc: '(37)12 or (27)13'
+            '3':
+              Desc: '(37)03, min'
+            '4':
+              Desc: '(37)03, max'
+      Link:
+        '2': normal
+    '7':
+      Desc: '6+bidsuit, 1-oM'
+      Follow:
+        '1':
+          Desc: relay
+          Follow:
+            '1':
+              Desc: (61)33
+              Follow: {}
+              Link:
+                SuitDetermination3: normal
+            '2':
+              Desc: (71)(23)
+              Follow:
+                '1':
+                  Desc: 'asking for 3 cards'
+                  Anchor: '3'
+                  Follow:
+                    '1':
+                      Desc: 3low
+                    '2':
+                      Desc: 3high
+                3N:
+                  Desc: 'to play'
+            '3':
+              Desc: '(70)33, min  '
+            '4':
+              Desc: '(70)33, max'
+    '8':
+      Desc: 8+bidsuit(<=QJxxxxxx)
+    '9':
+      Desc: 8+bidsuit(>=QJTxxxxx)
+SuitDetermination3:
+  Desc: 'Define Trump out of 3 suits'
+  Follow:
+    '1':
+      Desc: 'Trump:= lowSuit'
+      Follow: {}
+    '2':
+      Desc: 'Trump:= medSuit'
+    '3':
+      Desc: 'Trump:= highSuit'
+    3N:
+      Desc: 'to play'

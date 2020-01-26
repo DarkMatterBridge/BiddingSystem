@@ -1,74 +1,27 @@
 opening:
   Opponent:
-    O>2H:
-      Desc: '4+H, 4+S, 6-10'
+    2H:
+      Desc: 4+H, 4+S, 6-10
       Follow:
         X:
-          Desc: '15-18, bal'
-          Follow:
-            2S:
-              Desc: 'requests 2N'
-              Follow:
-                2N:
-                  Desc: forced
-                  Follow:
-                    3m:
-                      Desc: '6+m, 0-6'
-                    3M:
-                      Desc: 'to play / NIS ????'
-                    3N:
-                      Desc: 9-13
-                    4N:
-                      Desc: 14-16
-                3A:
-                  Desc: '/possible?'
-            2N:
-              Desc: 7-8
-            3m:
-              Desc: '5+m, f1'
-            3M:
-              Desc: '5+M, f1'
-              Anchor: '5'
-        2S:
-          Desc: '6+m, 15+'
-          Follow:
-            2N:
-              Desc: 7+
-            3C:
-              Desc: 'to play if m=C, unbal / warum unbalanced?'
-            3D:
-              Desc: '3+C, game interest, unbal '
-            3M:
-              Desc: '5+M, f1'
-            3N:
-              Desc: 'to play'
-        2N:
-          Desc: '4+C, 4+D, 5+m, 13+'
-          Follow:
-            3M:
-              Desc: stopper
-        3m:
-          Desc: 10-14
-        3M:
-          Desc: '6+M, 16+'
-        3N:
-          Desc: 'to play'
+          Desc: 15-18, semibal
   Follow:
     1C:
       Desc: 16+
       Follow:
         1D:
           Desc: 0-7
+          Follow:
+            7N:
+              Desc: Abschluss :-)
           Link: 
-            1C-1D : normal
+            1C-1D : replace
         1H:
           Desc: '8-11, 4-S'
-          Link: 
-            1C-1H : normal
+          Follow: 1C-1H
         1S:
           Desc: '8+, 5+S'
-          Link: 
-            1C-1P : normal
+          Follow: 1C-1P
         1N:
           Desc: '12+, 5+C'
           Follow:
@@ -244,8 +197,7 @@ opening:
               Desc: 'todo / legt Trumpffarbe fest, Cuebids'
             4C:
               Desc: 6+C(<=1Loser)
-              Link: 
-                Turbo: normal
+              Follow: Turbo
             4D:
               Desc: 3+D
         2D:
@@ -320,8 +272,7 @@ opening:
               Desc: /nis
             4m:
               Desc: 'Turbosuit:=m'
-              Link: 
-                Turbo: normal
+              Follow: Turbo
         2H:
           Desc: '14+, bal.'
           Follow:
@@ -330,12 +281,10 @@ opening:
             2N:
               Desc: 5+H
             3C:
-              Link: 
-                0 : normal
+              Follow: '0'
             3D:
               Desc: ""
-              Link: 
-                1 : normal
+              Follow: '1'
             3M:
               Desc: '4+M, 5+C'
               Follow:
@@ -350,12 +299,10 @@ opening:
                 4N:
                   Desc: '3343, nonmin'
             4C:
-              Link: 
-                3 :normal
+              Follow: '3'
             4D:
               Desc: ""
-              Link: 
-                4 :normal
+              Follow: '4'
             3N:
               Desc: '4333, min'
               Follow:
@@ -367,8 +314,7 @@ opening:
                       Follow:
                         S1:
                           Desc: 'requests Turbo'
-                          Link: 
-                            Turbo :normal
+                          Follow: Turbo
         2S:
           Desc: '12+, 4441'
           Follow:
@@ -380,16 +326,13 @@ opening:
                   Follow:
                     S1/ex3N:
                       Desc: 'asking '
-                      Link: 
-                        1C-2S-A-R-AskingPoints :normal
+                      Follow: 1C-2S-A-R-AskingPoints
                     S2/ex3N:
                       Desc: 'asking, 4+ midSuit'
-                      Link: 
-                        1C-2S-A-R-AskingPoints :normal
+                      Follow: 1C-2S-A-R-AskingPoints
                     S3/ex3N:
                       Desc: 'asking, 4+ highSuit'
-                      Link: 
-                        1C-2S-A-R-AskingPoints :normal
+                      Follow: 1C-2S-A-R-AskingPoints
                     3N:
                       Desc: 'to play'
         2N:
@@ -428,23 +371,19 @@ opening:
                           Follow:
                             4D:
                               Desc: '4C, requests Turbo'
-                              Link: 
-                                Turbo: normal
+                              Follow: Turbo
                             4H:
                               Desc: '4D, requests Turbo'
-                              Link: 
-                                Turbo: normal
+                              Follow: Turbo
                         4D:
                           Desc: '4C,4D,12'
                           Follow:
                             4H:
                               Desc: '4C, requests Turbo'
-                              Link: 
-                                Turbo: normal
+                              Follow: Turbo
                             4S:
                               Desc: '4D, requests Turbo'
-                              Link: 
-                                Turbo: normal
+                              Follow: Turbo
                     3S:
                       Desc: '???'
                     3N:
@@ -487,8 +426,7 @@ opening:
                           Desc: '3-C, 3-D'
                     4H:
                       Desc: '4S, requests Turbo / nis '
-                      Link: 
-                        Turbo: normal
+                      Follow: Turbo
                     4S:
                       Desc: 'to play'
                 3S:
@@ -506,8 +444,7 @@ opening:
                       Desc: 'to play'
                     4S:
                       Desc: '4H, requests Turbo'
-                      Link: 
-                        Turbo: normal
+                      Follow: Turbo
                 3N:
                   Desc: '4H, 4S'
                   Follow:
@@ -576,13 +513,11 @@ opening:
             4C:
               Desc: '6+C / Change'
               Anchor: '3'
-              Link: 
-                Turbo: normal
+              Follow: Turbo
             4D:
               Desc: '6+D / Change'
               Anchor: '4'
-              Link: 
-                Turbo: normal
+              Follow: Turbo
         3C:
           Desc: '10+, any solid suid with max one side king'
           Follow:
@@ -636,40 +571,22 @@ opening:
           Desc: '5+ nS[+1]'
     1D:
       Desc: '11-15, 2+D'
-      Link:
-        1DOpening : normal
+      Follow: 1DOpening
     1H:
       Desc: '11-15, 5+bidsuit'
-      Link:
-        1HOpening : normal
+      Follow: 1HOpening
     1S:
       Desc: '11-15, 5+bidsuit'
-      Link:
-        1SOpening : normal
+      Follow: 1SOpening
     2C:
       Desc: '11-15, 6+C'
-      Link:
-        2COpening : normal
+      Follow: 2COpening
     2N:
       Desc: '22-23, bal.'
       Prio: 100
-    1N:
-      Desc: 14-16
       Follow:
-        2C:
-          Desc: Stayman
-        2D:
-          Desc: 5+H
-        2H:
-          Desc: 5+S
-        2S:
-          Desc: Asking
-          Follow:
-            2N:
-              Desc: min
-            3C:
-              Desc: max
-              Follow: {}
+        3C:
+          Desc: Puppet
   Desc: 'the root of all bidding'
 1DOpening:
   Follow:
@@ -864,11 +781,11 @@ opening:
                 3N:
                   Desc: 'stopper in unbid suits'
                 Hebung:
-                  Desc: 3+G<lastsuit> / Ersatzturbo
+                  Desc: 3+G<lastsuit>
+                  Follow: Ersatzurbo
             3H:
               Desc: 'GF / requests cuebids , unserious'
-              Link: 
-                cue_unserious: normal
+              Follow: cue_unserious
             4H:
               Desc: 'to play'
         2H:
@@ -1001,10 +918,10 @@ opening:
                   Desc: 'stopper in unbid suits'
                 Hebung:
                   Desc: 3+G<lastsuit>
+                  Follow: Ersatzurbo
             3P:
               Desc: 'GF / requests cuebids , unserious'
-              Link:
-                 cue_unserious: normal
+              Follow: cue_unserious
             4P:
               Desc: 'to play'
         2H:
@@ -1100,8 +1017,7 @@ opening:
           Follow:
             2N:
               Desc: '24+, bal.'
-              Link: 
-                2NT-Follow : normal
+              Follow: 2NT-Follow
             3C:
               Desc: 'GF with H, 4+D'
             3D:
@@ -1132,8 +1048,7 @@ opening:
           Desc: '4+S, 5-7, 1-bidsuit'
     2N:
       Desc: '22-23, bal.'
-      Link:
-        2NT-Follow : normal
+      Follow: 2NT-Follow
     3C:
       Desc: 'GF in C,  3-M'
       Follow:
@@ -1255,18 +1170,6 @@ opening:
               Desc: 5bidsuit
         2D:
           Desc: 5+H
-          Follow:
-            2H:
-              Desc: 3+H
-              Follow:
-                2S-3D:
-                  Desc: '/NIS kürzen?'
-            2S:
-              Desc: '2-H,4+S /NIS'
-            2N:
-              Desc: '2-H, 3-S /NIS'
-            3m:
-              Desc: '5+m /NIS'
         2H:
           Desc: 5+C
           Follow:
@@ -1524,8 +1427,7 @@ opening:
       Desc: 4441
     2N:
       Desc: '22-23, bal.'
-      Link: 
-        2NT-Follow :normal
+      Follow: 2NT-Follow
 1C-1P:
   1N:
     Desc: '17-19 or 24+, bal. ; natürlich Weterreizung'

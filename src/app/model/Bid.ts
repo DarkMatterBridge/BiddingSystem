@@ -1,19 +1,20 @@
-// bid in a biddingsystem
+import { devModeEqual } from '@angular/core/src/change_detection/change_detection';
 
-export class BsBid {
+// Real Bid
 
-    node: any; // a pointer to a node in a biddingsystem
-    bidname: string // the name of the bid in a biddingsystem
-    who: number // 0 = we, 1 = they
+export class Bid {
+
+    level: number; 
+    denomination: string;
     direction: number ; // 0>North; 1 > East, 2> South, 3> West
 
+    constructor(bidname: String) {
+
+    }
+
+    name() {
+        return this.level+this.denomination;
+    }
+
 }
-
-// BsBid > Bid
-// Bid: level (1-7), kind(C,D,H,S,N)
-
-// BsBiddingSequnce > BiddingSequence
-
-
-// Follow
 

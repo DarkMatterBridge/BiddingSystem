@@ -8,6 +8,7 @@ import { Bidding } from '../model/Bidding';
   templateUrl: './bidding.component.html',
   styleUrls: ['./bidding.component.css']
 })
+
 export class BiddingComponent implements OnInit {
 
   biddingSystem: BiddingSystem;
@@ -15,11 +16,14 @@ export class BiddingComponent implements OnInit {
   anchors: any;
   keys: any[];
   editMode = false;
+  showDescription = true;
   http: HttpClient;
   possibleBids: any[];
 
   bid: string;
   desc: string;
+
+  bsName = "biSy.json";
 
   constructor(http: HttpClient) { this.http = http }
 
@@ -34,14 +38,17 @@ export class BiddingComponent implements OnInit {
   }
 
   select(i) {
-    this.biddingSystem.selectBid(this.biddingSystem.getBidByIndex(i));
+    this.biddingSystem.selectBid(this.getBid(i));
     this.bidding.addBid(this.biddingSystem.getCurrentBid());
     this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
     if (this.possibleBids.length == 0) {
-       this.anchors = this.biddingSystem.findAllAnchors();
-        this.keys =  Array.from(this.anchors.keys()); 
-        }
-    } 
+      this.getAnchors();
+    }
+  }
+
+  getBid(i) {
+    return this.biddingSystem.getBidByIndex(i);
+  }
 
   revertTo(i) {
     this.biddingSystem.currentNode = this.bidding.getBid(i)[1];
@@ -49,29 +56,60 @@ export class BiddingComponent implements OnInit {
     this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
   }
 
+  ///
+  getAnchors() {
+    this.anchors = this.biddingSystem.findAllAnchors();
+    this.keys = Array.from(this.anchors.keys());
+  }
+
   addAnchor(i) {
     this.biddingSystem.addAnchor(i);
+    this.getAnchors();
   }
 
   removeAnchor(i) {
     this.biddingSystem.removeAnchor(i);
+    this.getAnchors();
   }
 
   hasAnchor(i) {
-    var obid = this.biddingSystem.getBidByIndex(i);
-      return obid[1]["Anchor"] != undefined;
+    var obid = this.getBid(i);
+    return obid[1]["Anchor"] != undefined;
   }
 
-  getAttachedDesc(i) {
-    if (this.isAttached(i))
-        return this.biddingSystem.getAttachedNode(this.biddingSystem.getBidByIndex(i)[1])["Desc"];
-    else 
-        return "";
+  //// Links
+  isLinked(i) {
+    return this.biddingSystem.linkExist(this.getBid(i)[1]);
   }
 
-  isAttached(i) {
-    return this.biddingSystem.followIsAttachedNode(this.biddingSystem.getBidByIndex(i)[1]);
+  getLinkedDesc(i) {
+    if (this.biddingSystem.linkExist(this.getBid(i)[1]))
+      return this.biddingSystem.getLinkedNode(this.getBid(i)[1])["Desc"];
+    else
+      return "";
   }
+
+  removeLinkFromBid(i) {
+    if (this.biddingSystem.linkExist(this.getBid(i)[1]))
+      this.biddingSystem.detachAnchorFromNode(this.getBid(i)[1]);
+  }
+
+  materializeLinkAtBid(i) {
+    console.log(this.getBid(i)[1]);
+    if (this.biddingSystem.linkExist(this.getBid(i)[1]))
+      this.biddingSystem.materialAnchorAtNode(this.getBid(i));
+  }
+
+  // getAttachedDesc(i) {
+  //   if (this.isAttached(i))
+  //       return this.biddingSystem.getAttachedNode(this.getBid(i)[1])["Desc"];
+  //   else 
+  //       return "";
+  // }
+
+  // isAttached(i) {
+  //   return this.biddingSystem.followIsAttachedNode(this.getBid(i)[1]);
+  // }
 
   startBidding() {
     this.possibleBids = this.biddingSystem.startBidding();
@@ -89,34 +127,34 @@ export class BiddingComponent implements OnInit {
     this.bid = "";
     this.desc = "";
   }
-  
+
   removeBid(i) {
-    var bidname  =  this.biddingSystem.getBidByIndex(i)[0];
-    delete this.biddingSystem.currentNode["Follow"][bidname];
+    this.biddingSystem.removeBidFromCurrentNode(this.getBid(i)[0]);
     this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
     this.anchors = this.biddingSystem.findAllAnchors();
-}
+  }
 
 
   attachAnchor(anchor) {
-    alert(anchor);
     this.biddingSystem.attachAnchorToCurrentNode(anchor);
-    this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
+    this.possibleBids = this.biddingSystem.getCurrentPossibleBids();// why was this commented out?
   }
 
   processFile(jsonInput: any) {
     const file: File = jsonInput.files[0];
+    this.bsName = file.name;
     const fileReader = new FileReader();
     fileReader.onload = fileLoadedEvent => {
       var data: string | ArrayBuffer;
       data = fileReader.result
       this.biddingSystem.systemHierarchy = JSON.parse(data.toString());
-      this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
-      this.bidding.cutBidding(-1);
+      this.startBidding();
+      //      this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
+      //      this.bidding.cutBidding(-1);
     }
     fileReader.readAsText(file);
   }
- 
+
   showBiddingSystemAsJson() {
     var we = window.open("", "hallo");
     we.document.write(JSON.stringify(this.biddingSystem.systemHierarchy));
@@ -124,12 +162,20 @@ export class BiddingComponent implements OnInit {
 
   downloadSystem() {
     var text = JSON.stringify(this.biddingSystem.systemHierarchy);
+    var we = window.open("", "hallo");
+    we.document.write(text);
+
     var blob = new Blob([text], { type: 'text/plain' });
     var anchor = document.createElement('a');
-    anchor.download = "bs.json";
+    anchor.download = this.bsName;
     anchor.href = (window.URL).createObjectURL(blob);
     anchor.dataset.downloadurl = ['text/plain', anchor.download, anchor.href].join(':');
     anchor.click();
+  }
+
+  newSystem() {
+    this.biddingSystem.newSystem();
+    this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
   }
 
 

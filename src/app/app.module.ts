@@ -9,6 +9,7 @@ import { DealviewComponent } from './dealview/dealview.component';
 import { FormsModule } from '@angular/forms';
 import { SystemdownloadComponent } from './systemdownload/systemdownload.component';
 import { BiddingComponent } from './bidding/bidding.component';
+import * as yaml2json from 'yaml2json';
 
 @NgModule({
   declarations: [
