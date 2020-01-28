@@ -32,14 +32,16 @@ export class BiddingComponent implements OnInit {
     this.biddingSystem.loadSystem().subscribe(
       (data: any) => {
         this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
+        this.bidding = this.biddingSystem.bidding;
       }
     );
-    this.bidding = new Bidding();
+    //    this.bidding = new Bidding();
   }
 
   select(i) {
     this.biddingSystem.selectBid(this.getBid(i));
-    this.bidding.addBid(this.biddingSystem.getCurrentBid());
+//    this.bidding = this.biddingSystem.bidding;
+    //    this.bidding.addBid(this.biddingSystem.getCurrentBid());
     this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
     if (this.possibleBids.length == 0) {
       this.getAnchors();
@@ -113,12 +115,10 @@ export class BiddingComponent implements OnInit {
 
   startBidding() {
     this.possibleBids = this.biddingSystem.startBidding();
-    this.bidding.cutBidding(-1);
   }
 
   startRootBidding() {
     this.possibleBids = this.biddingSystem.startRootBidding();
-    this.bidding.cutBidding(-1);
   }
 
   addBid() {
@@ -149,8 +149,6 @@ export class BiddingComponent implements OnInit {
       data = fileReader.result
       this.biddingSystem.systemHierarchy = JSON.parse(data.toString());
       this.startBidding();
-      //      this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
-      //      this.bidding.cutBidding(-1);
     }
     fileReader.readAsText(file);
   }

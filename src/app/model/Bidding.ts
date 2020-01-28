@@ -2,6 +2,7 @@ export class Bidding {
 
     nodes = [];
     bids = [];
+    types = [];
     index: number;
 
     constructor() {
@@ -11,8 +12,9 @@ export class Bidding {
     addBid(nextBid) {
         this.bids.push(nextBid[0]);
         this.nodes.push(nextBid[1]);
+        this.types.push(nextBid[3]);
         this.index++;
-        }
+    }
 
     getLastBid() {
         return (this.index);
@@ -31,6 +33,7 @@ export class Bidding {
     cutBidding(i) {
         this.bids.splice(i + 1, 100);
         this.nodes.splice(i + 1, 100);
+        this.types.splice(i + 1, 100);
     }
 
 }

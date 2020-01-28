@@ -5,8 +5,11 @@
 </p>
 
   <span *ngFor="let bid of bidding.bids; let i = index ">
-      <a [routerLink]="" (click)="revertTo(i)"> {{bid}}  </a>:
-        {{bidding.nodes[i]["Desc"]}}
+    <span *ngIf="bidding.types[i]==='Opponent'" >(</span>  
+    <a [routerLink]="" (click)="revertTo(i)"> {{bid}}  </a>:
+      {{bidding.nodes[i]["Desc"]}} 
+
+      <span *ngIf="bidding.types[i]==='Opponent'" >)</span>  
     </span>
 
 <div *ngIf="!editMode">
@@ -29,9 +32,9 @@
             <a *ngIf="!hasAnchor(i)" [routerLink]="" (click)="addAnchor(i)"> Add as Anchor  </a>
             <a *ngIf="hasAnchor(i)" [routerLink]="" (click)="removeAnchor(i)"> Remove Anchor  </a>
             <a  [routerLink]="" (click)="removeBid(i)"> Remove Bid  </a>
-            <span *ngIf="isLinked(i)">   {{getLinkedDesc(i)}} x
-                <a [routerLink]="" (click)="removeLinkFromBid(i)"> Unlink </a>y
-                <a [routerLink]="" (click)="materializeLinkAtBid(i)"> materialize </a>z
+            <span *ngIf="isLinked(i)">   {{getLinkedDesc(i)}} 
+                <a [routerLink]="" (click)="removeLinkFromBid(i)"> Unlink </a>
+                <a [routerLink]="" (click)="materializeLinkAtBid(i)"> materialize </a>
                 
             </span>    
           </li>

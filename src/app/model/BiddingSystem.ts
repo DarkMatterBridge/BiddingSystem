@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
+import { Bidding } from './Bidding';
 
 export class BiddingSystem {
 
     anchors = new Map();
     maxAnchor = 0;
+
+    public bidding: Bidding;
 
     private _systemHierarchy = {};
     public get systemHierarchy() {
@@ -44,6 +47,7 @@ export class BiddingSystem {
 
     constructor(private http: HttpClient) {
         this.loadSystem();
+        this.bidding = new Bidding();
     }
 
     // ------------------- System-Initializer --------------------------------------------------------------
@@ -72,22 +76,23 @@ export class BiddingSystem {
 
     startBidding() {
         this.currentFollowNode = this.systemHierarchy;
-        //        this.currentBid2 = "opening";
         this.currentNode = this.systemHierarchy["opening"];
-        this.currentBid = "";
-        this.findAllAnchors();
+        this.initialize();
         return this.getCurrentPossibleBids();
     }
 
     startRootBidding() {
         this.currentFollowNode = { "root": { "Follow": this.systemHierarchy } };
-        //        this.currentBid2 = "root";
         this.currentNode = { "Follow": this.systemHierarchy };
-        this.currentBid = "";
-        this.findAllAnchors();
+        this.initialize();
         return this.getCurrentPossibleBids();
     }
 
+    initialize() {
+        this.currentBid = "";
+        this.findAllAnchors();
+        this.bidding.cutBidding(-1);
+    }
 
     // ------------------- get Currents Bids --------------------------------------------------------------
 
@@ -113,26 +118,28 @@ export class BiddingSystem {
     }
 
     getPossibleBids(node: any) {
-        var bids = this.getDirectPossibleBids(node, "Follow", "direct");
+        var bids = this.getDirectPossibleBids(node, "Follow", "Direct");
         if (node["Link"]) {
             bids = bids.concat(this.getDirectPossibleBids(this.getLinkedNode(node), "Follow",
                 "linked: " + this.getLinkedNode(node)["Desc"]));
         }
 
         if (node["Opponent"])
-            bids = bids.concat(this.getDirectPossibleBids(node, "Opponent", "opponent"));
+            bids = bids.concat(this.getDirectPossibleBids(node, "Opponent", "Opponent"));
         return bids;
     }
 
     getDirectPossibleBids(node: any, name, typ) {
-        if (!this.followExist(node))
+        console.log("possible bids: " + typ);
+        if (!this.followExist(node, "Follow"))
             this.addEmptyFollow(node);
         return Object.getOwnPropertyNames(node[name]).map(bid => [bid, node[name][bid], node[name], typ])
     }
 
-    followExist(node: any) {
-        return node["Follow"] != undefined;
+    followExist(node: any, subname) {
+        return node[subname] != undefined;
     }
+
 
     getBidByIndex(i) {
         return this.getCurrentPossibleBids()[i];
@@ -172,6 +179,7 @@ export class BiddingSystem {
         this.currentBid = bidob[0];   // Bidname
         this.currentNode = bidob[1];  // node after bidname
         this.currentFollowNode = bidob[2];  // node after follow before bidname
+        this.bidding.addBid(bidob);
 
         //       this.currentNode = this.getAttachedNode(this.currentNode);  // todo > repitition + bidding
         //       this.currentNode = this.getAttachedNode(this.currentNode);
@@ -231,7 +239,7 @@ export class BiddingSystem {
         var follownode = bid[2];
         console.log(bidnode);
         var json = JSON.stringify(this.getLinkedNode(bidnode));
-       console.log(json);
+        console.log(json);
         delete bidnode["Link"]
         follownode[bidname] = JSON.parse(json);
         delete follownode[bidname]["Anchor"];
@@ -262,13 +270,29 @@ export class BiddingSystem {
 
     // ------------------- Add and remove Bids to Nodes --------------------------------------------------------------
 
+    addEmptySubname(node: any, subname: string) {
+        node[subname] = {};
+    }
+
     addEmptyFollow(node: any) {
         node["Follow"] = {};
     }
 
+
     addBidToNode(node: any, bid: string, description: string) {
-        if (this.followExist(node))
-            node["Follow"][bid] = { 'Desc': description };
+        if (bid.includes("<")) {
+            if (!this.followExist(node, "Opponent"))
+                this.addEmptySubname(node, "Opponent");
+            var regex = /.*\<(.*)/;
+            var a = regex.exec(bid);
+            console.log("regex " + a);
+            if (a != null) {
+                node["Opponent"][a[1]] = { 'Desc': description };
+            }
+        } else {
+            if (this.followExist(node, "Follow"))
+                node["Follow"][bid] = { 'Desc': description };
+        }
     }
 
     addBidToCurrentNode(bid: string, description: string) {
@@ -278,7 +302,11 @@ export class BiddingSystem {
 
     removeBidFromCurrentNode(bidname) {
         var nd = this.currentNode["Follow"]
-        delete nd[bidname]
+        if (nd)
+            delete nd[bidname]
+        nd = this.currentNode["Opponent"]
+        if (nd)
+            delete nd[bidname]
     }
 
     // ------------------- Finding all Anchors --------------------------------------------------------------
