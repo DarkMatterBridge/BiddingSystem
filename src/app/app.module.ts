@@ -10,6 +10,12 @@ import { FormsModule } from '@angular/forms';
 import { SystemdownloadComponent } from './systemdownload/systemdownload.component';
 import { BiddingComponent } from './bidding/bidding.component';
 import * as yaml2json from 'yaml2json';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ManageBSComponent } from './manage-bs/manage-bs.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { BidSymbolComponent } from './bid-symbol/bid-symbol.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +23,23 @@ import * as yaml2json from 'yaml2json';
     SystemComponent,
     DealviewComponent,
     SystemdownloadComponent,
-    BiddingComponent
+    BiddingComponent,
+    ManageBSComponent,
+    NavigationComponent,
+    BidSymbolComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

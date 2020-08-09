@@ -1,0 +1,27 @@
+.mat-list-item {
+ 
+    height: 24px;
+
+}
+
+.bid {
+    width: 60px;
+}
+
+.bidDescription {
+    font-size: small;
+}
+
+.spaceForSymbol {
+    width: 30px;
+}
+
+a:link    {
+    text-decoration: none;
+     /* Deklarationen */ }
+a:visited {
+    text-decoration: none;
+     /* Deklarationen */ }
+a:focus   { /* Deklarationen */ }
+a:hover   { /* Deklarationen */ }
+a:active  { /* Deklarationen */ }

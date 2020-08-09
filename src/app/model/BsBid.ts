@@ -1,21 +1,26 @@
 import { Bid } from './Bid';
 
-// bid in a biddingsystem
+// bid in a biddingsystem > this is the future
 
 export class BsBid {
 
-    node: any; // a pointer to a node in a biddingsystem
-    bidname: String // the name of the bid in a biddingsystem
-    who: number // 0 = we, 1 = they
-    direction: number ; // 0>North; 1 > East, 2> South, 3> West
+  node: any; // a pointer to a node in a biddingsystem
+  bidname: String // the name of the bid in a biddingsystem
+  who: number // 0 = we, 1 = they
+  direction: number ; // 0>North; 1 > East, 2> South, 3> West
 
-    context: any; 
+  context: any;
+
+  BsBid(node: any, bidname: string, who: string, direction :number) {
+
+   }
+
 
     matches(bid: Bid) {
       var step = Number(this.bidname);
       if ( step === NaN ) {
 
-      } else { // step 
+      } else { // step
          // step === bid -lastbid
       }
 

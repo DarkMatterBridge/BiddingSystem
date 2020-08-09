@@ -11,7 +11,7 @@ import { BiddingState } from '../model/BiddingState';
   templateUrl: './system.component.html',
   styleUrls: ['./system.component.css']
 })
-export class SystemComponent implements OnInit {
+export class SystemComponent implements OnInit {  // obsolete class!!!!
 
   constructor(private http: HttpClient) { }
   bs: any; // bridge system
@@ -45,6 +45,8 @@ export class SystemComponent implements OnInit {
 
 
   ngOnInit() {
+
+    localStorage.afae = "afdadfa";
 
     this.symbols.set("C", '♣');
     this.symbols.set("D", '♦');
@@ -209,7 +211,8 @@ export class SystemComponent implements OnInit {
 
   newSystem() {
     this.bs = { "opening": { "Follow": { "1c": { "Desc": "...." } } } };
-    this.reset();
+    this.bs = JSON.parse(localStorage.getItem('system'));
+     this.reset();
   }
 
   private getConfig() {
@@ -257,7 +260,7 @@ export class SystemComponent implements OnInit {
     this.lastBid['Follow'] = {}
   }
  
-  processFile(imageInput: any) {
+  processFile(imageInput: any) {  
     const file: File = imageInput.files[0];
     const fileReader = new FileReader();
 
@@ -266,10 +269,10 @@ export class SystemComponent implements OnInit {
       datae = fileReader.result
       this.bs = JSON.parse(datae.toString());
       this.reset();
+      localStorage.setItem('systema', datae.toString());
     }
 
     fileReader.readAsText(file);
-
   }
 
 

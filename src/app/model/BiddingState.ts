@@ -1,4 +1,4 @@
-export class BiddingState {
+export class BiddingState {  //obsolete
 
     currentNode: {};
     currendBid: string;

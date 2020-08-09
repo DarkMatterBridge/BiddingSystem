@@ -1,58 +1,136 @@
 <p>
-    <button (click)="startBidding()"> Start Bidding </button>
-    <button (click)="editMode=!editMode"> Edit-Switch </button>
-    <button (click)="showDescription=!showDescription"> Show  Description Switch </button>
+  <button (click)="startBidding()"> Start Bidding </button>
+  <button (click)="editMode=!editMode"> Edit-Switch </button>
+  <button (click)="showDescription=!showDescription"> Show Description Switch </button>
+  <input #jsonInput type="file" accept=".json" (change)="processFile(jsonInput)">
+  <button (click)="downloadSystem()"> Download System</button>
+  
+  <button (click)="newSystem()"> new System</button>
 </p>
 
-  <span *ngFor="let bid of bidding.bids; let i = index ">
-    <span *ngIf="bidding.types[i]==='Opponent'" >(</span>  
-    <a [routerLink]="" (click)="revertTo(i)"> {{bid}}  </a>:
-      {{bidding.nodes[i]["Desc"]}} 
+<table>
+  <tr  *ngFor="let round of bidding.rounds(); let i = index; ">   
+ <td *ngFor="let bid of round; let j = index">
 
-      <span *ngIf="bidding.types[i]==='Opponent'" >)</span>  
-    </span>
+  <a [routerLink]="" (click)="revertBiddingTo(bid)" >
+    <app-bid-symbol [bid]="bid[0]"></app-bid-symbol>
+  </a>
+  <span class="bidDescription">
+    {{bid[1]["Desc"]}}
+  </span>
+     
+ </td>
+</tr>
+</table>
 
 <div *ngIf="!editMode">
-    <ul>
-        <li *ngFor="let bid of possibleBids; let i = index ">
-          <a [routerLink]="" (click)="select(i)"> {{bid[0]}}  </a>:
-          <span *ngIf="showDescription"> {{bid[1]["Desc"]}} >   {{getLinkedDesc(i)}}</span>    
-        </li>
-    </ul>
+  <mat-list>
+    <mat-list-item *ngFor="let bid of possibleBids; let i = index ">
+
+      <span class="spaceForSymbol"> <span *ngIf="bid[3]=='Opp'">
+        <i class="material-icons">
+          face
+        </i>
+      </span>
+      <span *ngIf="bid[3]=='Linked'">
+        <i class="material-icons">
+          link
+        </i>
+      </span>
+
+    </span>
+
+      <span class="bid"> <a [routerLink]="" (click)="select(i)">
+        <app-bid-symbol [bid]="bid[0]"></app-bid-symbol>
+      </a></span>
+      <span *ngIf="showDescription"> {{bid[1]["Desc"]}}
+        <span *ngIf="isLinked(i)">
+          <i class="material-icons">
+            link
+          </i>
+          {{getLinkedDesc(i)}}</span> </span>
+    </mat-list-item>
+  </mat-list>
 </div>
 
 <div *ngIf="editMode">
-    <button (click)="startRootBidding()"> Start From Root </button>
-    <ul>
-        <li *ngFor="let bid of possibleBids; let i = index ">
-            <a [routerLink]="" (click)="select(i)"> {{bid[0]}}  </a>:
-            <input [(ngModel)]="bid[1]['Desc']" size="60"/>
-              {{bid[3]}}
+  <mat-list>
+    <mat-list-item *ngFor="let bid of possibleBids; let i = index ">
+      <span class="spaceForSymbol"> <span *ngIf="bid[3]=='Opp'">
+          <i class="material-icons">
+            face
+          </i>
+        </span>
+        <span *ngIf="bid[3]=='Linked'">
+          <i class="material-icons">
+            link
+          </i>
+        </span>
 
-            <a *ngIf="!hasAnchor(i)" [routerLink]="" (click)="addAnchor(i)"> Add as Anchor  </a>
-            <a *ngIf="hasAnchor(i)" [routerLink]="" (click)="removeAnchor(i)"> Remove Anchor  </a>
-            <a  [routerLink]="" (click)="removeBid(i)"> Remove Bid  </a>
-            <span *ngIf="isLinked(i)">   {{getLinkedDesc(i)}} 
-                <a [routerLink]="" (click)="removeLinkFromBid(i)"> Unlink </a>
-                <a [routerLink]="" (click)="materializeLinkAtBid(i)"> materialize </a>
-                
-            </span>    
-          </li>
-        <li><input [(ngModel)]="bid" size="5" /><input [(ngModel)]="desc" size="60"/>
-            <button (click)=addBid()> Add </button>
-        </li>
-    </ul>
-    <div *ngIf="possibleBids.length >=0"> Add an Anchor
-        <div *ngFor="let key of keys" > 
-            <a [routerLink]="" (click)="attachAnchor(key)"> {{key}} : {{anchors.get(key)[1]}}  </a>
-           </div>
+      </span>
+      <span class="bid"><a [routerLink]="" (click)="select(i)"> 
+        <app-bid-symbol [bid]="bid[0]"> </app-bid-symbol>
+      </a>
+      </span>
+      <input [(ngModel)]="bid[1]['Desc']" size="50" />
+
+      <a *ngIf="!hasAnchor(i)" [routerLink]="" (click)="addAnchor(i)">
+        <i class="material-icons">
+          add
+        </i>
+      </a>
+      <a *ngIf="hasAnchor(i)" [routerLink]="" (click)="removeAnchor(i)">
+        <i class="material-icons">
+          grade
+        </i>
+      </a>
+
+      <a [routerLink]="" (click)="removeBid(i)">
+        <i class="material-icons">
+          delete
+        </i>
+      </a>
+      <span *ngIf="isLinked(i)"> {{getLinkedDesc(i)}}
+        <a [routerLink]="" (click)="removeLinkFromBid(i)">
+          <i class="material-icons">
+            link_off
+          </i>
+        </a>
+        <a [routerLink]="" (click)="materializeLinkAtBid(i)"> 
+          <i class="material-icons">
+            library_books
+          </i>
+          
+        </a>
+
+      </span>
+    </mat-list-item>
+    <mat-list-item>
+      <span class="bid"><input [(ngModel)]="bid" size="5" /></span>
+      <input [(ngModel)]="desc" size="60" />
+
+      <button (click)=addBid()> Add </button>
+    </mat-list-item>
+  </mat-list>
+  <button (click)="startRootBidding()"> Start From Root </button>
+
+  <div *ngIf="possibleBids.length >=0"> Add an Anchor
+    <div *ngFor="let key of keys">
+      <a [routerLink]="" (click)="attachAnchor(key)"> {{key}} : {{anchors.get(key)[1]}} </a>
     </div>
+  </div>
 </div>
 
 
 <button (click)="load()"> Reload Fixed System</button>
 
-<input #jsonInput type="file" accept=".json" (change)="processFile(jsonInput)">
-<button (click)="downloadSystem()"> Download System</button>
-
-<button (click)="newSystem()"> new System</button>
+<span *ngFor="let bid of bidding.bidNames; let i = index ">
+  <span *ngIf="bidding.types[i]==='Opp'">(</span>
+  <a [routerLink]="" (click)="revertTo(i)" >
+    <app-bid-symbol [bid]="bid"></app-bid-symbol>
+ </a>:
+ <span class="bidDescription">
+  {{bidding.nodes[i]["Desc"]}}
+</span>
+  <span *ngIf="bidding.types[i]==='Opp'">)</span>
+</span>

@@ -23,6 +23,7 @@ export class BiddingComponent implements OnInit {
   bid: string;
   desc: string;
 
+  red = "red";
   bsName = "biSy.json";
 
   constructor(http: HttpClient) { this.http = http }
@@ -53,8 +54,12 @@ export class BiddingComponent implements OnInit {
   }
 
   revertTo(i) {
-    this.biddingSystem.currentNode = this.bidding.getBid(i)[1];
-    this.bidding.cutBidding(i);
+    this.biddingSystem.revertBiddingToRound(i);
+    this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
+  }
+
+  revertBiddingTo(b) {
+    this.biddingSystem.revertBiddingToBid(b);
     this.possibleBids = this.biddingSystem.getCurrentPossibleBids();
   }
 
@@ -85,7 +90,7 @@ export class BiddingComponent implements OnInit {
   }
 
   getLinkedDesc(i) {
-    if (this.biddingSystem.linkExist(this.getBid(i)[1]))
+    if (this.isLinked(i))
       return this.biddingSystem.getLinkedNode(this.getBid(i)[1])["Desc"];
     else
       return "";
@@ -148,6 +153,7 @@ export class BiddingComponent implements OnInit {
       var data: string | ArrayBuffer;
       data = fileReader.result
       this.biddingSystem.systemHierarchy = JSON.parse(data.toString());
+      localStorage.setItem('system', data.toString());
       this.startBidding();
     }
     fileReader.readAsText(file);

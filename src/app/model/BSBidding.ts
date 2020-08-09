@@ -1,70 +1,102 @@
-import { Bidding } from './Bidding';
-import { BiddingSystem } from './BiddingSystem';
-import { Bid } from './Bid';
+import { BsBid } from './BsBid';
 
 export class BSBidding {
 
-    bidding: Bidding;
-    biddingSystem: BiddingSystem;
-    realBidding: any; // todo
 
-    loopt() {
+    bsBids: BsBid[];
+    nodes = [];
+    bidNames = [];
 
-        // loop durch realBidding
-        // match jedes Bid auf bidding und biddingsystem
+
+
+    types = [];
+    direction = [];
+    index: number;
+    currentDirection = 'N';
+
+    constructor() {
+        this.index = 0;
     }
 
-    matchNewBid(bid: Bid) {
+    addBid(nextBid) {
 
-        var currentPossibleBids = this.biddingSystem.getCurrentPossibleBids();
-        currentPossibleBids.forEach(element => {
-            // direct match z.B. 1N - 2C - 2D
-            // stepwise match 3 (step)  entspricht 1S-2C-2S
-            // major or minor match: 1N-3M
-            // bidsuit match 
-            // match of M/m  repition: 1M-3M
-            // .....
-            if (element[0] === bid.name()) {
+        this.bsBids.push(nextBid);
 
+        this.bidNames.push(nextBid[0]);
+        this.nodes.push(nextBid[1]);
+        this.types.push(nextBid[3]);
+        this.direction.push(this.currentDirection);
+        this.toggleDirection();
+        this.index++;
+    }
+
+    toggleDirection() {
+        if (this.currentDirection == 'N')
+            this.currentDirection = 'S';
+        else
+            this.currentDirection = 'N';
+    }
+
+    getLastBid() {
+        return (this.index);
+    }
+
+    getBid(i) {
+        return [this.bidNames[i], this.nodes[i], this.nodes[i]["Desc"]];
+    }
+
+    getSequence() {
+        if (this.index > 0)
+            console.log(this.bidNames[0])
+        return Array.from({ length: this.index }, (v, k) => k + 1).map(i => [this.bidNames[i], this.nodes[i]]);
+    }
+
+    cutBidding(i) {
+        this.bsBids.splice(i + 1, 100);
+        this.bidNames.splice(i + 1, 100);
+        this.nodes.splice(i + 1, 100);
+        this.types.splice(i + 1, 100);
+    }
+
+    increase(round) {
+        var bidsInRound = new Array;
+        round.push(bidsInRound);
+        return bidsInRound;
+    }
+
+    rounds() {
+        var round = [];
+        var bidsInRound: any;
+        var biddingCounter = 0; // 0-3
+        var biddingOngoing = false;
+        var lastBidWasOppenent = false;
+
+        bidsInRound = this.increase(round);
+        for (let index = 0; index < this.bsBids.length; index++) {
+            if (this.bsBids[index][3] == 'Opp') {
+                if (lastBidWasOppenent && biddingOngoing)
+                    bidsInRound.push(['-', { 'Desc': '' }, '', '']);
+                bidsInRound.push(this.bsBids[index]);
+                biddingCounter = (biddingCounter + 1) % 4;
+                if (biddingCounter == 0)
+                    bidsInRound = this.increase(round);
+                lastBidWasOppenent = true;
             }
-
-        });
-    }
-
-    generateRealBids() {
-        var currentPossibleBids = this.biddingSystem.getCurrentPossibleBids();
-        var realBids = {};
-
-        // sort bids by concrete, placeholder, steps
-        currentPossibleBids.forEach(bsBid => {
-            if (this.isConcrete(bsBid)) {
-                realBids[bsBid[0]] = [bsBid[1], new Bid(bsBid[0])];
+            else {
+                if (!lastBidWasOppenent && biddingOngoing) {
+                    bidsInRound.push(['-', { 'Desc': '' }, '', '']);
+                    biddingCounter = (biddingCounter + 1) % 4;
+                    if (biddingCounter == 0)
+                        bidsInRound = this.increase(round);
+                }
+                bidsInRound.push(this.bsBids[index]);
+                biddingCounter = (biddingCounter + 1) % 4;
+                if (biddingCounter == 0)
+                    bidsInRound = this.increase(round);
+                lastBidWasOppenent = false;
             }
-            if (this.hasPlaceHolder(bsBid)) { // M or m
-            }
-            if (this.isStep(bsBid)) {
-            }
-        });
-
+            biddingOngoing = true;
+        }
+        return round;
     }
-
-    isConcrete(bid) {
-        return true;
-    }
-
-    hasPlaceHolder(bid) {
-        return true;
-    }
-    isStep(bid) {
-        return true;
-    }
-
-    //   BSBidding
-    //   RealBidding
-
-    //   Aufgabe: Transformiere RealBidding zu BSBidding
-    // Dafür brauchen wir RealBdding BSBidding
-
-
-
 }

@@ -118,22 +118,21 @@ export class BiddingSystem {
     }
 
     getPossibleBids(node: any) {
-        var bids = this.getDirectPossibleBids(node, "Follow", "Direct");
+        var bids = this.getDirectPossibleBids(node, "Follow", "Direct", "");
         if (node["Link"]) {
             bids = bids.concat(this.getDirectPossibleBids(this.getLinkedNode(node), "Follow",
-                "linked: " + this.getLinkedNode(node)["Desc"]));
+                "Linked", this.getLinkedNode(node)["Desc"]));
         }
 
         if (node["Opponent"])
-            bids = bids.concat(this.getDirectPossibleBids(node, "Opponent", "Opponent"));
+            bids = bids.concat(this.getDirectPossibleBids(node, "Opponent", "Opp", ""));
         return bids;
     }
 
-    getDirectPossibleBids(node: any, name, typ) {
-        console.log("possible bids: " + typ);
+    getDirectPossibleBids(node: any, name, typ, text) {
         if (!this.followExist(node, "Follow"))
             this.addEmptyFollow(node);
-        return Object.getOwnPropertyNames(node[name]).map(bid => [bid, node[name][bid], node[name], typ])
+        return Object.getOwnPropertyNames(node[name]).map(bid => [bid, node[name][bid], node[name], typ, text])
     }
 
     followExist(node: any, subname) {
@@ -188,6 +187,25 @@ export class BiddingSystem {
         //        this.preparedAfterFollow = this.currentNode["Afterfollow"];
     }
 
+    revertBiddingToRound(i) {
+        this.currentBid = this.bidding.getBid(i)[0];
+        this.currentNode = this.bidding.getBid(i)[1];
+        this.bidding.cutBidding(i);
+
+    }
+
+    revertBiddingToBid(bid) {
+        var i = 0;
+        for (let index = 0; index < this.bidding.bidNames.length; index++) {
+            if (bid[0] ==  this.bidding.bidNames[index])
+                i = index;            
+        }
+
+        this.currentBid = this.bidding.getBid(i)[0];
+        this.currentNode = this.bidding.getBid(i)[1];
+        this.bidding.cutBidding(i);
+
+    }
 
     // followHasRealChild(node) {
     //     //        alert(JSON.stringify(node["Follow"]))
@@ -236,12 +254,15 @@ export class BiddingSystem {
 
         var bidname = bid[0];
         var bidnode = bid[1];
+        var description = bid[1]["Desc"];
         var follownode = bid[2];
         console.log(bidnode);
         var json = JSON.stringify(this.getLinkedNode(bidnode));
         console.log(json);
         delete bidnode["Link"]
         follownode[bidname] = JSON.parse(json);
+        follownode[bidname]["Desc"] = description;
+        
         delete follownode[bidname]["Anchor"];
         // remove link todo
     }
@@ -255,6 +276,7 @@ export class BiddingSystem {
     addAnchorToNode(node) {
         this.maxAnchor++;
         node["Anchor"] = this.maxAnchor.toString();
+        console.log("maxAnchor ="+ this.maxAnchor);
         this.findAllAnchors();
     }
 
@@ -296,7 +318,46 @@ export class BiddingSystem {
     }
 
     addBidToCurrentNode(bid: string, description: string) {
-        this.addBidToNode(this.currentNode, bid, description);
+
+        var englishBids = ['1C', '1D', '1H', '1S', '1N',
+            '2C', '2D', '2H', '2S', '2N',
+            '3C', '3D', '3H', '3S', '3N',
+            '4C', '4D', '4H', '4S', '4N',
+            '5C', '5D', '5H', '5S', '5N',
+            '6C', '6D', '6H', '6S', '6N',
+            '7C', '7D', '7H', '7S', '7N'];
+        var addMode = false;
+
+        var regex = /(.+)-(.+)/;
+        var a = regex.exec(bid);
+        var regex2 = /->(.+)/;
+        var b = regex2.exec(bid);
+
+        if (a != null) {
+            let evax = a[1];
+            let evay = a[2];
+            let lower = englishBids.find(el => el == evax)
+            let higher = englishBids.find(el => el == evay)
+            if (lower != null && higher != null) {
+                for (let index = 0; index < englishBids.length; index++) {
+                    if (englishBids[index] == evax) 
+                        addMode = true;
+                    if (addMode == true)
+                        this.addBidToNode(this.currentNode, englishBids[index], '');
+                    if (englishBids[index] == evay) 
+                        addMode = false
+                }
+            }
+        }
+        else if (b!=null) {
+            let evax = b[1];
+            this.getCurrentPossibleBids().forEach( pb => {
+                this.addBidToNode(pb[1], evax, description)});
+            
+        } else
+        {
+            this.addBidToNode(this.currentNode, bid, description);
+        }
         this.findAllAnchors();
     }
 
@@ -322,8 +383,8 @@ export class BiddingSystem {
     getRootAnchors() {
         let rootnodes = Object.getOwnPropertyNames(this.systemHierarchy);
         rootnodes.forEach(rootnodeName => {
-            console.log(rootnodeName);
-            console.log(this.systemHierarchy[rootnodeName]["Follow"]);
+//            console.log(rootnodeName);
+//            console.log(this.systemHierarchy[rootnodeName]["Follow"]);
             this.anchors.set(rootnodeName, [this.systemHierarchy[rootnodeName], this.systemHierarchy[rootnodeName]["Desc"]]);
         });
         //        for (var i in this.systemHierarchy) {
